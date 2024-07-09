@@ -17,7 +17,7 @@ body {
 }
 
 .slider h1 {
-    color: #fff;
+    color: #ffffff;
     font-size: 2vw;
     text-align: center;
     padding-top: 30px;
@@ -36,7 +36,7 @@ body {
     padding: 20px;
     transition: 0.5s;
     left: calc(50% - 110px);
-    top: 200px;
+    top: 15vh;
     z-index: 2;
 }
 
@@ -56,11 +56,11 @@ body {
     font-size: 100px;
     font-family: monospace;
     font-weight: bold;
-    left: 400px;
+    left: 10vw;
 
 }
 
 #next {
     left: unset;
-    right: 400px;
+    right: 10vw;
 }

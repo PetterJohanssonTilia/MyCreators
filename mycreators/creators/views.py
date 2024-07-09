@@ -63,3 +63,8 @@ class PersonalizedFeedView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         followed_creators = Creator.objects.filter(followers=self.request.user)
         return Post.objects.filter(creator__in=followed_creators).order_by('-created_at')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['creators'] = Creator.objects.filter(followers=self.request.user)
+        return context

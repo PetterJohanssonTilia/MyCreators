@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Your Personalized Feed</title>
+  </head>
+  <body>
+    <h1>Your Personalized Feed</h1>
+    {% if posts %}
+    <ul>
+      {% for post in posts %}
+      <li>
+        <h3>
+          {{ post.creator.user.username }} - {{ post.created_at|date:"F d, Y" }}
+        </h3>
+        <p>{{ post.content }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No posts in your feed. Try following some creators!</p>
+    {% endif %}
+    <a href="{% url 'followed_creators' %}">Creators You Follow</a>
+    <a href="{% url 'creator_list' %}">Discover Creators</a>
+  </body>
+</html>

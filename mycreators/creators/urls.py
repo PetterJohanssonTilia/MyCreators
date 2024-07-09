@@ -1,5 +1,12 @@
 from django.urls import path
-from .views import CreatorListView, CreatorAboutMeView
+from .views import (
+    CreatorListView, 
+    CreatorAboutMeView, 
+    FollowedCreatorsView, 
+    PersonalizedFeedView,
+    follow_creator,
+    unfollow_creator
+)
 from . import views
 
 urlpatterns = [

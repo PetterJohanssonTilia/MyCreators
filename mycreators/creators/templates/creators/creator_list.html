@@ -1,30 +1,26 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Creators List</title>
-  </head>
-  <body>
+{% extends 'base.html' %}
+
+{% block title %}All Creators{% endblock %}
+
+{% block content %}
     <h1>Creators</h1>
     {% if creators %}
-    <ul>
-      {% for creator in creators %}
-      <li>
-        <a href="{% url 'creator_aboutme' creator.pk %}">
-          {{ creator.user.username }}
-        </a>
-        {% if creator.avatar %}
-        <img
-          src="{{ creator.avatar.url }}"
-          alt="{{ creator.user.username }}'s avatar"
-          width="50"
-        />
-        {% endif %}
-        <p>{{ creator.about_me|truncatewords:20 }}</p>
-      </li>
-      {% endfor %}
-    </ul>
+        <div class="creator-grid">
+            {% for creator in creators %}
+                <div class="creator-card">
+                    <a href="{% url 'creator_aboutme' creator.pk %}">
+                        {% if creator.avatar %}
+                            <img src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="avatar">
+                        {% else %}
+                            <div class="avatar-placeholder"></div>
+                        {% endif %}
+                        <h2>{{ creator.user.username }}</h2>
+                    </a>
+                    <p>{{ creator.about_me|truncatewords:20 }}</p>
+                </div>
+            {% endfor %}
+        </div>
     {% else %}
-    <p>No creators found.</p>
+        <p>No creators found.</p>
     {% endif %}
-  </body>
-</html>
+{% endblock %}

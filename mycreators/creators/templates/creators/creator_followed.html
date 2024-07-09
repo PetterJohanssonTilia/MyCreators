@@ -9,9 +9,7 @@
     <ul>
       {% for creator in followed_creators %}
       <li>
-        <a href="{% url 'creator_aboutme' creator.pk %}">{{
-          creator.user.username
-        }}</a>
+        <a href="{% url 'creator_aboutme' creator.pk %}">{{ creator.user.username }}</a>
       </li>
       {% endfor %}
     </ul>

@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>{{ creator.user.username }}'s Page</title>
-  </head>
-  <body>
+{% extends 'base.html' %}
+
+{% block title %}{{ creator.user.username }}'s Page{% endblock %}
+
+{% block content %}
     <h1>{{ creator.user.username }}'s Page</h1>
 
     {% if creator.avatar %}
@@ -37,5 +36,4 @@
     {% endif %}
 
     <a href="{% url 'creator_list' %}">Back to Creators List</a>
-  </body>
-</html>
+{% endblock %}

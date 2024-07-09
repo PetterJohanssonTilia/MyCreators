@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{ creator.user.username }}</title>
+    <title>{{ creator.user.username }}'s Page</title>
   </head>
   <body>
-    <h1>{{ creator.user.username }}</h1>
+    <h1>{{ creator.user.username }}'s Page</h1>
+
     {% if creator.avatar %}
     <img
       src="{{ creator.avatar.url }}"
       alt="{{ creator.user.username }}'s avatar"
-      width="200"
     />
     {% endif %}
+
     <h2>About Me</h2>
     <p>{{ creator.about_me }}</p>
+
+    {% if user.is_authenticated %} {% if is_following %}
+    <a href="{% url 'unfollow_creator' creator.pk %}">Unfollow</a>
+    {% else %}
+    <a href="{% url 'follow_creator' creator.pk %}">Follow</a>
+    {% endif %} {% endif %}
 
     <h2>Posts</h2>
     {% if posts %}
@@ -26,7 +33,7 @@
       {% endfor %}
     </ul>
     {% else %}
-    <p>No posts yet.</p>
+    <p>This creator hasn't posted anything yet.</p>
     {% endif %}
 
     <a href="{% url 'creator_list' %}">Back to Creators List</a>

@@ -33,6 +33,8 @@ class CreatorAboutMeView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = self.object.posts.all().order_by('-created_at')
+        if self.request.user.is_authenticated:
+            context['is_following'] = self.object.followers.filter(id=self.request.user.id).exists()
         return context
     
 @login_required
@@ -48,7 +50,7 @@ def unfollow_creator(request, pk):
     return redirect('creator_aboutme', pk=pk)
 
 class FollowedCreatorsView(LoginRequiredMixin, ListView):
-    template_name = 'creators/followed_creators.html'
+    template_name = 'creators/creator_followed.html'
     context_object_name = 'followed_creators'
 
     def get_queryset(self):

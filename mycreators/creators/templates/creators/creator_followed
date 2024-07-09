@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Creators You Follow</title>
+  </head>
+  <body>
+    <h1>Creators You Follow</h1>
+    {% if followed_creators %}
+    <ul>
+      {% for creator in followed_creators %}
+      <li>
+        <a href="{% url 'creator_aboutme' creator.pk %}">{{
+          creator.user.username
+        }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>You are not following any creators yet.</p>
+    {% endif %}
+    <a href="{% url 'creator_list' %}">Discover Creators</a>
+    <a href="{% url 'personalized_feed' %}">View Your Feed</a>
+  </body>
+</html>

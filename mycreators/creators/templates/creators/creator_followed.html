@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Creators You Follow</title>
-  </head>
-  <body>
+{% extends 'base.html' %}
+
+{% block title %}Creators You Follow{% endblock %}
+
+{% block content %}
     <h1>Creators You Follow</h1>
     {% if followed_creators %}
     <ul>
@@ -18,5 +17,4 @@
     {% endif %}
     <a href="{% url 'creator_list' %}">Discover Creators</a>
     <a href="{% url 'personalized_feed' %}">View Your Feed</a>
-  </body>
-</html>
+{% endblock %}

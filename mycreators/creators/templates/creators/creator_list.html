@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Creators</title>
+  </head>
+  <body>
+    <h1>Creators</h1>
+    {% if creators %}
+    <ul>
+      {% for creator in creators %}
+      <li>
+        {{ creator.user.username }} {% if creator.avatar %}
+        <img
+          src="{{ creator.avatar.url }}"
+          alt="{{ creator.user.username }}'s avatar"
+          width="50"
+        />
+        {% endif %}
+        <p>{{ creator.about_me|truncatewords:20 }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No creators found.</p>
+    {% endif %}
+  </body>
+</html>

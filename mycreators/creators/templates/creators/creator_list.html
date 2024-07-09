@@ -13,7 +13,10 @@
     <ul>
       {% for creator in creators %}
       <li>
-        {{ creator.user.username }} {% if creator.avatar %}
+        <a href="{% url 'creator_aboutme' creator.id %}">
+          {{ creator.user.username }}
+        </a>
+        {% if creator.avatar %}
         <img
           src="{{ creator.avatar.url }}"
           alt="{{ creator.user.username }}'s avatar"

@@ -5,6 +5,10 @@
   </head>
   <body>
     <h1>Creators</h1>
+    <form method="get">
+      <input type="text" name="search" placeholder="Search creators..." />
+      <button type="submit">Search</button>
+    </form>
     {% if creators %}
     <ul>
       {% for creator in creators %}

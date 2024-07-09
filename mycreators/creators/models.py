@@ -7,6 +7,8 @@ class Creator(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to='creator_avatars/', null=True, blank=True)
     about_me = models.TextField(blank=True)
+    followers = models.ManyToManyField(User, related_name='following', blank=True)
+
 
     def __str__(self):
         return self.user.username

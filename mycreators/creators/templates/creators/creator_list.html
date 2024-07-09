@@ -1,18 +1,19 @@
-{% extends 'base.html' %}
 
+{% extends 'base.html' %}
+{% load static %}
 {% block title %}All Creators{% endblock %}
 
 {% block content %}
     <h1>Creators</h1>
     {% if creators %}
-        <div class="creator-grid">
+        <div class="row col-12">
             {% for creator in creators %}
-                <div class="creator-card">
+                <div class="card" style="width: 18rem;">
                     <a href="{% url 'creator_aboutme' creator.pk %}">
                         {% if creator.avatar %}
-                            <img src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="avatar">
+                            <img class="card-img-top" src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="avatar">
                         {% else %}
-                            <div class="avatar-placeholder"></div>
+                            <img class="card-img-top" src="{% static 'images/placeholderavatar.png' %}" alt="{{ creator.user.username }}'s avatar" class="avatar">
                         {% endif %}
                         <h2>{{ creator.user.username }}</h2>
                     </a>

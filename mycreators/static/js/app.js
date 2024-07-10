@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let next = document.getElementById('next');
     let prev = document.getElementById('prev');
 
-    let active = 0; // Set the initial active item to 1
+    let active = 2; // Set the initial active item to 1
 
     function loadShow() {
         let stt = 0;

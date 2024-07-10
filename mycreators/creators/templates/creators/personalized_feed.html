@@ -3,25 +3,6 @@
 {% block title %}Feed{% endblock %}
 
 {% block content %}
-  <div class="slider">
-    <h1>Creators</h1>
-    {% for creator in creators %}
-      <div class="item">
-        <a href="{% url 'creator_aboutme' creator.pk %}">
-          {% if creator.avatar %}
-            <img class="card-img-top" src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="avatar">
-          {% else %}
-              <img class="card-img-top" src="{% static 'images/placeholderavatar.png' %}" alt="{{ creator.user.username }}'s avatar" class="avatar">
-          {% endif %}
-          <h1>{{ creator.user.username }}</h1>
-        </a>
-        <p>{{ creator.about_me|truncatewords:20 }}</p>
-      </div>
-    {% endfor %}
-    <button id="prev"><</button>
-    <button id="next">></button>
-  </div>
-
   <h1>Your Personalized Feed</h1>
   {% if posts %}
     <ul>

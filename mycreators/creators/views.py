@@ -10,6 +10,11 @@ from .models import Creator, Post
 class IndexView(TemplateView):
     template_name = 'creators/index.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['creators'] = Creator.objects.all()
+        return context
+
 class CreatorListView(ListView):
     model = Creator
     template_name = 'creators/creator_list.html'
@@ -30,7 +35,7 @@ class CreatorAboutMeView(DetailView):
     model = Creator
     template_name = 'creators/creator_aboutme.html'
     context_object_name = 'creator'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = self.object.posts.all().order_by('-created_at')
@@ -64,8 +69,8 @@ class PersonalizedFeedView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         followed_creators = Creator.objects.filter(followers=self.request.user)
         return Post.objects.filter(creator__in=followed_creators).order_by('-created_at')
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['creators'] = Creator.objects.filter(followers=self.request.user)
+        # Make sure you're not adding unwanted context here
         return context

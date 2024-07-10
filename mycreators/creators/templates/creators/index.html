@@ -1,28 +1,27 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Creators You Follow{% endblock %}
 
 {% block content %}
-  <div class="row">
-    <div class="col-md-3 creators-you-follow">
-      <h1>Creators You Follow</h1>
-      {% if followed_creators %}
-      <ul>
-        {% for creator in followed_creators %}
-        <li>
-          <a href="{% url 'creator_aboutme' creator.pk %}">{{ creator.user.username }}</a>
-        </li>
-        {% endfor %}
-      </ul>
-      {% else %}
-      <p>You are not following any creators yet.</p>
-      {% endif %}
-      <a href="{% url 'creator_list' %}">Discover Creators</a>
-      <a href="{% url 'personalized_feed' %}">View Your Feed</a>
-    </div>
-    <div class="col-md9">
-      helooooooooooooooooooooooooooooooooooooooooooooooooooooooo
-    </div>
+<div class="jumbotron">
+  <h1 class="display-4">Hello, world!</h1>
+  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <div class="slider">
+    {% for creator in creators %}
+      <div class="item">
+        <a href="{% url 'creator_aboutme' creator.pk %}">
+          {% if creator.avatar %}
+            <img class="card-img-top" src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="avatar">
+          {% else %}
+              <img class="card-img-top" src="{% static 'images/placeholderavatar.png' %}" alt="{{ creator.user.username }}'s avatar" class="avatar">
+          {% endif %}
+          <h2>{{ creator.user.username }}</h2>
+        </a>
+        <p>{{ creator.about_me|truncatewords:20 }}</p>
+      </div>
+    {% endfor %}
+    <button id="prev"><</button>
+    <button id="next">></button>
   </div>
-  
+</div>
 {% endblock %}

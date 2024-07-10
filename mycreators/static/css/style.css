@@ -14,6 +14,12 @@ body {
     color: #8B5CF6;
 }
 
+/* =============== Index =============== */
+.jumbotron {
+    background-image:
+        linear-gradient(to top right, #8B5CF6, #EC4899);
+}
+
 /* =============== My feed =============== */
 
 /* Following - Cards slider*/
@@ -22,8 +28,6 @@ body {
     width: 100%;
     height: 50vh;
     overflow: hidden;
-    background-image:
-        linear-gradient(to top right, #8B5CF6, #EC4899);
     z-index: 1;
 }
 

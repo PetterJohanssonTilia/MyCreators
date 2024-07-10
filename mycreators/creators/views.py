@@ -68,9 +68,8 @@ class CreatorAboutMeView(DetailView):
     template_name = 'creators/creator_aboutme.html'
     context_object_name = 'creator'
 
-    def get_object(self, queryset=None):
-        username = self.kwargs.get('username')
-        return get_object_or_404(Creator, user__username=username)
+    def get_object(self):
+        return get_object_or_404(Creator, user__username=self.kwargs['username'])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

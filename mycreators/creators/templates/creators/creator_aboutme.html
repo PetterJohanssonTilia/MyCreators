@@ -3,6 +3,9 @@
 {% block title %}{{ creator.user.username }}'s Page{% endblock %}
 
 {% block content %}
+    {% if user == creator.user %}
+    <a href="{% url 'edit_creator_aboutme' %}">Edit About Me</a>
+    {% endif %}
     <h1>{{ creator.user.username }}'s Page</h1>
 
     {% if creator.avatar %}

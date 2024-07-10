@@ -21,4 +21,7 @@ urlpatterns = [
     path('post/<int:pk>/', views.PostDetailView.as_view(), name='post_detail'),
     path('post/<int:post_id>/comment/', views.add_comment, name='add_comment'),
     path('post/<int:post_id>/comment/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
+    path('request-creator/', views.request_creator_status, name='request_creator_status'),
+    path('request-submitted/', views.creator_request_submitted, name='creator_request_submitted'),
+    path('creator-status/', views.creator_status, name='creator_status'),
 ]

@@ -5,14 +5,31 @@ from django.utils import timezone
 # Create your models here.
 
 class Creator(models.Model):
+    CREATOR_TYPES = [
+        ('PHOTOGRAPHER', 'Photographer'),
+        ('GAME_DEVELOPER', 'Game Developer'),
+        ('CONTENT_CREATOR', 'Content Creator'),
+        ('ARTIST', 'Artist'),
+        ('VOICE_ACTOR', 'Voice Actor'),
+        ('OTHER', 'Other'),
+    ]
+    
+    STATUS_CHOICES = [
+        ('PENDING', 'Pending'),
+        ('APPROVED', 'Approved'),
+        ('REJECTED', 'Rejected'),
+    ]
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to='creator_avatars/', null=True, blank=True)
     about_me = models.TextField(blank=True)
+    creator_type = models.CharField(max_length=20, choices=CREATOR_TYPES, default='OTHER')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')
+    request_message = models.TextField(blank=True)
     followers = models.ManyToManyField(User, related_name='following', blank=True)
 
-
     def __str__(self):
-        return self.user.username
+        return f"{self.user.username} - {self.get_creator_type_display()} ({self.get_status_display()})"
 
 class Post(models.Model):
     creator = models.ForeignKey('Creator', on_delete=models.CASCADE, related_name='posts')

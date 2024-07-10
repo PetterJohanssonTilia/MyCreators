@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Creator Status</h2>
+    <p>Type: {{ creator.get_creator_type_display }}</p>
+    <p>Status: {{ creator.get_status_display }}</p>
+    {% if creator.status == 'PENDING' %}
+        <p>Your request is being reviewed.</p>
+    {% elif creator.status == 'APPROVED' %}
+        <p>Congratulations! You are now a creator.</p>
+    {% elif creator.status == 'REJECTED' %}
+        <p>Unfortunately, your request was not approved at this time.</p>
+    {% endif %}
+{% endblock %}

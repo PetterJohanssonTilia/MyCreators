@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, TemplateView
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, CreatorRequestForm
 from .models import Creator, Post
 
 
@@ -35,6 +35,32 @@ class CreatorListView(ListView):
             )
         return queryset
     
+#Request to become creator
+@login_required
+def request_creator_status(request):
+    if hasattr(request.user, 'creator'):
+        return redirect('creator_status')
+    
+    if request.method == 'POST':
+        form = CreatorRequestForm(request.POST)
+        if form.is_valid():
+            creator = form.save(commit=False)
+            creator.user = request.user
+            creator.status = 'PENDING'
+            creator.save()
+            return redirect('creator_request_submitted')
+    else:
+        form = CreatorRequestForm()
+    return render(request, 'creators/request_creator_status.html', {'form': form})
+
+def creator_request_submitted(request):
+    return render(request, 'creators/request_creator_status_submitted.html')
+
+@login_required
+def creator_status(request):
+    creator = Creator.objects.get(user=request.user)
+    return render(request, 'creators/creator_status.html', {'creator': creator})
+
 #Creator about me
 class CreatorAboutMeView(DetailView):
     model = Creator
@@ -102,7 +128,7 @@ class PostDetailView(DetailView):
     template_name = 'creators/post_detail.html'
     context_object_name = 'post'
 
-#Comments
+# Add Comments
 @login_required
 def add_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -111,7 +137,7 @@ def add_comment(request, post_id):
         if content:
             post.add_comment(request.user, content)
     return redirect('post_detail', pk=post_id)
-#Comments
+# DeleteComments
 @login_required
 def delete_comment(request, post_id, comment_id):
     post = get_object_or_404(Post, id=post_id)

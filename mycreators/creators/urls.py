@@ -1,12 +1,6 @@
 from django.urls import path
 from .views import(
-    CreatorListView, 
-    CreatorAboutMeView, 
-    FollowedCreatorsView, 
-    PersonalizedFeedView,
     IndexView,
-    follow_creator,
-    unfollow_creator
 )
 from . import views
 

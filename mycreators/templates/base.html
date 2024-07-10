@@ -42,8 +42,9 @@
             </li>
             {% endif %}
             {% if user.is_authenticated %}
-              {% if user|is_creator %}
-                <a href="{% url 'creator_status' %}">Creator Status</a>
+              {% creator_status user as status %}
+              {% if status %}
+                <span>Creator status: {{ status }}</span>
               {% else %}
                 <a href="{% url 'request_creator_status' %}">Become a Creator</a>
               {% endif %}

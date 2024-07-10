@@ -37,14 +37,20 @@
               <a href="{% url 'login' %}">Login</a>
             </li>
             <li>
-              <a href="#">Register</a>
+              <a href="{% url 'register' %}">Register</a>
             </li>
             {% endif %}
           </ul>
         </div>
       </nav>
     </header>
-
+    {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+          </div>
+      {% endfor %}
+    {% endif %}
     <main>{% block content %} {% endblock %}</main>
 
     <footer>

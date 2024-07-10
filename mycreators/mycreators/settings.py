@@ -133,3 +133,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Login / Logout
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/' 
+
+#Message storage
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

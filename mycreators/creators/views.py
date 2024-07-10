@@ -1,13 +1,15 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Creator, Post
 
 
 # Create your views here.
 
-#=============== List of creators ===============
+class IndexView(TemplateView):
+    template_name = 'creators/index.html'
+
 class CreatorListView(ListView):
     model = Creator
     template_name = 'creators/creator_list.html'
@@ -24,12 +26,11 @@ class CreatorListView(ListView):
             )
         return queryset
 
-#=============== Creators about me page =================
 class CreatorAboutMeView(DetailView):
     model = Creator
     template_name = 'creators/creator_aboutme.html'
     context_object_name = 'creator'
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = self.object.posts.all().order_by('-created_at')

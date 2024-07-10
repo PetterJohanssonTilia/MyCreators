@@ -1,3 +1,4 @@
+/* =============== General styles =============== */
 body {
     margin: 0;
     padding: 0;
@@ -6,6 +7,16 @@ body {
 
 }
 
+.title {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2vw;
+    color: #8B5CF6;
+}
+
+/* =============== My feed =============== */
+
+/* Following - Cards slider*/
 .slider {
     position: relative;
     width: 100%;
@@ -63,4 +74,21 @@ body {
 #next {
     left: unset;
     right: 10vw;
+}
+
+/* =============== creator_list / All creators =============== */
+.all-creators {
+    background-color: cadetblue;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.creators-you-follow {
+    background-color: bisque;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
 }

@@ -9,9 +9,10 @@
       {% for post in posts %}
       <li>
         <h3>
-          {{ post.creator.user.username }} - {{ post.created_at|date:"F d, Y" }}
+          <a href="{% url 'post_detail' pk=post.id %}">Post by {{ post.creator.user.username }}</a>
         </h3>
-        <p>{{ post.content }}</p>
+        <p>{{ post.content|truncatewords:30 }}</p>
+        <small>Posted on: {{ post.created_at }}</small>
       </li>
       {% endfor %}
     </ul>

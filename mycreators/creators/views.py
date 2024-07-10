@@ -95,3 +95,27 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
+
+#View post
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'creators/post_detail.html'
+    context_object_name = 'post'
+
+#Comments
+@login_required
+def add_comment(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        if content:
+            post.add_comment(request.user, content)
+    return redirect('post_detail', pk=post_id)
+#Comments
+@login_required
+def delete_comment(request, post_id, comment_id):
+    post = get_object_or_404(Post, id=post_id)
+    comment = next((c for c in post.comments if c['id'] == comment_id), None)
+    if comment and comment['user_id'] == request.user.id:
+        post.delete_comment(comment_id)
+    return redirect('post_detail', pk=post_id)

@@ -26,7 +26,7 @@
     <ul>
       {% for post in posts %}
       <li>
-        <h3>{{ post.created_at|date:"F d, Y" }}</h3>
+        <h3><a href="{% url 'post_detail' pk=post.id %}">Post from {{ post.created_at }}</a></h3>
         <p>{{ post.content }}</p>
       </li>
       {% endfor %}

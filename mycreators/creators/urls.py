@@ -18,4 +18,7 @@ urlpatterns = [
     path('following/', views.FollowedCreatorsView.as_view(), name='followed_creators'),
     path('feed/', views.PersonalizedFeedView.as_view(), name='personalized_feed'),
     path('creators/', views.CreatorListView.as_view(), name='creator_list'),
+    path('post/<int:pk>/', views.PostDetailView.as_view(), name='post_detail'),
+    path('post/<int:post_id>/comment/', views.add_comment, name='add_comment'),
+    path('post/<int:post_id>/comment/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
 ]

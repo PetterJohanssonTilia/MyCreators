@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
-from django.views.generic import ListView, DetailView, TemplateView
-from .forms import UserRegisterForm, CreatorRequestForm
+from django.views.generic import ListView, DetailView, TemplateView, UpdateView
+from django.urls import reverse_lazy
+from .forms import UserRegisterForm, CreatorRequestForm, CreatorProfileForm
 from .models import Creator, Post
 
 
@@ -61,11 +62,15 @@ def creator_status(request):
     creator = Creator.objects.get(user=request.user)
     return render(request, 'creators/creator_status.html', {'creator': creator})
 
-#Creator about me
+#Creator About view
 class CreatorAboutMeView(DetailView):
     model = Creator
     template_name = 'creators/creator_aboutme.html'
     context_object_name = 'creator'
+
+    def get_object(self, queryset=None):
+        username = self.kwargs.get('username')
+        return get_object_or_404(Creator, user__username=username)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -73,6 +78,22 @@ class CreatorAboutMeView(DetailView):
         if self.request.user.is_authenticated:
             context['is_following'] = self.object.followers.filter(id=self.request.user.id).exists()
         return context
+    
+#Edit Creator About view
+class EditCreatorAboutMeView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Creator
+    form_class = CreatorProfileForm
+    template_name = 'creators/edit_creator_aboutme.html'
+
+    def get_object(self):
+        return self.request.user.creator
+
+    def test_func(self):
+        creator = self.get_object()
+        return self.request.user == creator.user
+
+    def get_success_url(self):
+        return reverse_lazy('creator_aboutme', kwargs={'username': self.request.user.username})
 
 #Follow creator
 @login_required

@@ -49,6 +49,9 @@
                 <a href="{% url 'request_creator_status' %}">Become a Creator</a>
               {% endif %}
             {% endif %}
+            {% if user.is_authenticated %}
+            <a href="{% url 'edit_creator_aboutme' %}">Edit About Me</a>
+            {% endif %}
           </ul>
         </div>
       </nav>

@@ -9,7 +9,7 @@
   <div class="slider">
     {% for creator in creators %}
       <div class="item">
-        <a href="{% url 'creator_aboutme' creator.pk %}">
+        <a href="{% url 'creator_aboutme' username=creator.user.username %}">
           {% if creator.avatar %}
             <img class="card-img-top" src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="avatar">
           {% else %}

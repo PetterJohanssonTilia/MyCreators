@@ -24,7 +24,7 @@
             <div class="col-md-9 all-creators">
             {% for creator in creators %}
                 <div class="card" style="width: 18rem;">
-                    <a href="{% url 'creator_aboutme' creator.pk %}">
+                    <a href="{% url 'creator_aboutme' username=creator.user.username %}">
                         {% if creator.avatar %}
                             <img class="card-img-top" src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="avatar">
                         {% else %}
@@ -32,7 +32,7 @@
                         {% endif %}
                     </a>
                     <div class="card-body">
-                        <a href="{% url 'creator_aboutme' creator.pk %}">
+                        <a href="{% url 'creator_aboutme' username=creator.user.username %}">
                             <h5 class="card-title">{{ creator.user.username }}</h5>
                         </a>
                         <p class="card-text">{{ creator.about_me|truncatewords:20 }}</p>

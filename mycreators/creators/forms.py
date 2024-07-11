@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Creator, Post
-from ckeditor.widgets import CKEditorWidget
+from django_summernote.widgets import SummernoteWidget
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
@@ -37,8 +37,9 @@ class CreatorProfileForm(forms.ModelForm):
         self.fields['creator_type'].choices = CreatorRequestForm.CREATOR_TYPES
 
 class PostForm(forms.ModelForm):
-    content = forms.CharField(widget=CKEditorWidget())
-
     class Meta:
         model = Post
         fields = ['title', 'content']
+        widgets = {
+            'content': SummernoteWidget(),
+        }

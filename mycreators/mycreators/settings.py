@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'creators',
     'bootstrap4',
-    'ckeditor',
-    'ckeditor_uploader',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -132,16 +131,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# CKEditor configuration
-CKEDITOR_UPLOAD_PATH = "uploads/"
-CKEDITOR_IMAGE_BACKEND = "pillow"
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'full',
-        'height': 300,
-        'width': '100%',
-    },
+# Summer note (text editor)
+SUMMERNOTE_CONFIG = {
+    'width': '100%',
+    'height': '480',
 }
 
 # Login / Logout

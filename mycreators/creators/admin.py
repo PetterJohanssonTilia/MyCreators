@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Creator, Post
-
+from django_summernote.admin import SummernoteModelAdmin
 # Register your models here.
 
 @admin.register(Creator)
@@ -19,8 +19,9 @@ class CreatorAdmin(admin.ModelAdmin):
     reject_creators.short_description = "Reject selected creators"
     
 @admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(SummernoteModelAdmin):
     list_display = ('creator', 'content', 'created_at', 'updated_at')
     list_filter = ('creator', 'created_at')
     search_fields = ('creator__user__username', 'content')
     readonly_fields = ('created_at', 'updated_at')
+    summernote_fields = ('content',)

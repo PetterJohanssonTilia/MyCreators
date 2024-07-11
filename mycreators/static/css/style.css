@@ -20,6 +20,11 @@ body {
         linear-gradient(to top right, #8B5CF6, #EC4899);
 }
 
+/* =============== Nav =============== */
+.my-page-link {
+    align-self: right;
+}
+
 /* =============== My feed =============== */
 
 /* Following - Cards slider*/

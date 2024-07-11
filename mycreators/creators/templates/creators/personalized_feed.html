@@ -3,22 +3,40 @@
 {% block title %}Feed{% endblock %}
 
 {% block content %}
-  <h1>Your Personalized Feed</h1>
-  {% if posts %}
-    <ul>
-      {% for post in posts %}
-      <li>
-        <h3>
-          <a href="{% url 'post_detail' pk=post.id %}">Post by {{ post.creator.user.username }}</a>
-        </h3>
-        <p>{{ post.content|truncatewords:30 }}</p>
-        <small>Posted on: {{ post.created_at }}</small>
-      </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No posts in your feed. Try following some creators!</p>
-  {% endif %}
-  <a href="{% url 'followed_creators' %}">Creators You Follow</a>
-  <a href="{% url 'creator_list' %}">Discover Creators</a>
-{% endblock %}
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1>Your Personalized Feed</h1>
+      {% if posts %}
+        {% for post in posts %}
+          <div class="d-flex justify-content-center mb-4">
+            <div class="card" style="width: 48rem">
+              <div class="row">
+                <div class="col-md-9 text-left">
+                  <h3>
+                    <a href="{% url 'post_detail' pk=post.id %}">{{ post.title }}</a>
+                  </h3>
+                  {{ post.content|truncatewords:30 }}</br>
+                  <small>Posted on: {{ post.created_at }}</small>
+                </div>
+                <div class="col-md-3">
+                    {% if post.creator.avatar %}
+                      <img class="avatar" src="{{ post.creator.avatar.url }}" alt="{{ post.creator.user.username }}'s avatar">
+                    {% else %}
+                      <img class="avatar" src="{% static 'images/placeholderavatar.png' %}" alt="{{ post.creator.user.username }}'s avatar">
+                    {% endif %}
+                    <br>
+                    <a href="{% url 'post_detail' pk=post.id %}">Post by {{ post.creator.user.username }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        
+      {% else %}
+        <p>No posts in your feed. Try following some creators!</p>
+      {% endif %}
+      <a href="{% url 'followed_creators' %}">Creators You Follow</a>
+      <a href="{% url 'creator_list' %}">Discover Creators</a>
+    </div>
+  </div>    
+    {% endblock %}

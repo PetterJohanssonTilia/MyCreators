@@ -5,6 +5,7 @@ from django.utils import timezone
 # Create your models here.
 
 class Creator(models.Model):
+
     CREATOR_TYPES = [
         ('PHOTOGRAPHER', 'Photographer'),
         ('GAME_DEVELOPER', 'Game Developer'),
@@ -33,6 +34,7 @@ class Creator(models.Model):
 
 class Post(models.Model):
     creator = models.ForeignKey('Creator', on_delete=models.CASCADE, related_name='posts')
+    title = models.CharField(max_length=200, default="Untitled Post")
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -40,7 +42,7 @@ class Post(models.Model):
 
     def add_comment(self, user, content):
         comment = {
-            'id': len(self.comments) + 1,  # Simple ID generation
+            'id': len(self.comments) + 1, 
             'user_id': user.id,
             'username': user.username,
             'content': content,
@@ -54,4 +56,4 @@ class Post(models.Model):
         self.save()
 
     def __str__(self):
-        return f"{self.creator.user.username}'s post at {self.created_at}"
+        return f"{self.title} - by {self.creator.user.username} at {self.created_at}"

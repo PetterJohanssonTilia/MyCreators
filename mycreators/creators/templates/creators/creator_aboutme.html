@@ -25,18 +25,21 @@
     {% endif %} {% endif %}
 
     <h2>Posts</h2>
-    {% if posts %}
-    <ul>
-      {% for post in posts %}
-      <li>
-        <h3><a href="{% url 'post_detail' pk=post.id %}">Post from {{ post.created_at }}</a></h3>
-        <p>{{ post.content }}</p>
-      </li>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <p>This creator hasn't posted anything yet.</p>
+    {% if user == creator.user %}
+        <a href="{% url 'create_post' %}">Create New Post</a>
     {% endif %}
-
-    <a href="{% url 'creator_list' %}">Back to Creators List</a>
+    
+    {% for post in posts %}
+        <div>
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.content }}</p>
+            <p>Posted on: {{ post.created_at }}</p>
+            {% if user == creator.user %}
+                <a href="{% url 'edit_post' pk=post.pk %}">Edit</a>
+                <a href="{% url 'delete_post' pk=post.pk %}">Delete</a>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No posts yet.</p>
+    {% endfor %}
 {% endblock %}

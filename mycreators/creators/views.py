@@ -1,9 +1,11 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, TemplateView, UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
+from django.db.models import Q
 from .forms import UserRegisterForm, CreatorRequestForm, CreatorProfileForm, PostForm
 from .models import Creator, Post
 

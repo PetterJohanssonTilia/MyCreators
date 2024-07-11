@@ -8,6 +8,7 @@ from .views import(
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('creator/edit/', views.EditCreatorAboutMeView.as_view(), name='edit_creator_aboutme'),
+    path('creator/delete/', views.DeleteCreatorAccount.as_view(), name='delete_creator_account'),
     path('creator/<str:username>/', views.CreatorAboutMeView.as_view(), name='creator_aboutme'),
     path('creator-status/', views.creator_status, name='creator_status'),
     path('follow/<int:pk>/', views.follow_creator, name='follow_creator'),

@@ -212,6 +212,8 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         form.instance.creator = self.request.user.creator
         return super().form_valid(form)
     
+    def get_success_url(self):
+        return reverse_lazy('creator_aboutme', kwargs={'username': self.request.user.username})
 #Edit Post
 class EditPostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post

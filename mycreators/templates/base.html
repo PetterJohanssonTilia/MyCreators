@@ -50,7 +50,12 @@
               {% endif %}
             {% endif %}
             {% if user.is_authenticated %}
-            <a href="{% url 'edit_creator_aboutme' %}">Edit About Me</a>
+              {% creator_status user as status %}
+              {% if status == 'APPROVED' %}
+              <a href="{% url 'edit_creator_aboutme' %}">Edit About Me</a>
+              {% else %}
+              <a href="{% url 'edit_creator_aboutme' %}"></a>
+              {% endif %}
             {% endif %}
           </ul>
         </div>

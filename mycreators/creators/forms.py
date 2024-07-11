@@ -27,9 +27,9 @@ class CreatorRequestForm(forms.Form):
 class CreatorProfileForm(forms.ModelForm):
     class Meta:
         model = Creator
-        fields = ['avatar', 'about_me', 'creator_type']
+        fields = ['avatar', 'creator_type', 'about_me']
         widgets = {
-            'about_me': forms.Textarea(attrs={'rows': 4}),
+            'about_me': SummernoteWidget(),
         }
 
     def __init__(self, *args, **kwargs):

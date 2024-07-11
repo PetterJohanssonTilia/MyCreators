@@ -142,14 +142,14 @@ class EditCreatorAboutMeView(LoginRequiredMixin, UserPassesTestMixin, UpdateView
 def follow_creator(request, pk):
     creator = get_object_or_404(Creator, pk=pk)
     creator.followers.add(request.user)
-    return redirect('creator_aboutme', pk=pk)
+    return redirect('creator_aboutme', username=creator.user.username)
 
 #Unfollow creator
 @login_required
 def unfollow_creator(request, pk):
     creator = get_object_or_404(Creator, pk=pk)
     creator.followers.remove(request.user)
-    return redirect('creator_aboutme', pk=pk)
+    return redirect('creator_aboutme', username=creator.user.username)
 
 #Followed creators - list
 class FollowedCreatorsView(LoginRequiredMixin, ListView):

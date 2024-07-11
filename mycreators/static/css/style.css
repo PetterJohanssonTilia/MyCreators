@@ -115,3 +115,33 @@ body {
     justify-content: space-around;
     margin-top: 20px;
 }
+
+/* Switch between Explore/Followed */
+
+.creator-section {
+    display: none;
+}
+
+#explore-creators {
+    display: block;
+}
+
+.creator-button {
+    background-color: turquoise;
+}
+
+.creator-button-active {
+    background-color: tomato;
+}
+
+/* Starts hidden  */
+div.hidden,
+.hidden {
+    background-color: azure;
+    display: none;
+}
+
+/* Click to Show  */
+.shown {
+    display: block;
+}

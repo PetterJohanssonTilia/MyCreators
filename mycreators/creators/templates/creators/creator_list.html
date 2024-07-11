@@ -1,45 +1,99 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}All Creators{% endblock %}
-
 {% block content %}
-    <h1 class="title">Creators</h1>
-        <div class="row">
-            <div class="col-md-3 creators-you-follow d-none d-md-block">
-                <h1>Creators You Follow</h1>
-                {% if followed_creators %}
-                <ul>
-                  {% for creator in followed_creators %}
-                  <li>
-                    <a href="{% url 'creator_aboutme' creator.pk %}">{{ creator.user.username }}</a>
-                  </li>
-                  {% endfor %}
-                </ul>
-                {% else %}
-                <p>You are not following any creators yet.</p>
-                {% endif %}
-                <a href="{% url 'creator_list' %}">Discover Creators</a>
-                <a href="{% url 'personalized_feed' %}">View Your Feed</a>
-              </div>
-            <div class="col-md-9 all-creators">
-            {% for creator in creators %}
-                <div class="card" style="width: 18rem;">
-                    <a href="{% url 'creator_aboutme' username=creator.user.username %}">
-                        {% if creator.avatar %}
-                            <img class="card-img-top" src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="avatar">
-                        {% else %}
-                            <img class="card-img-top" src="{% static 'images/placeholderavatar.png' %}" alt="{{ creator.user.username }}'s avatar" class="avatar">
-                        {% endif %}
-                    </a>
-                    <div class="card-body">
-                        <a href="{% url 'creator_aboutme' username=creator.user.username %}">
-                            <h5 class="card-title">{{ creator.user.username }}</h5>
-                        </a>
-                        <p class="card-text">{{ creator.about_me|truncatewords:20 }}</p>
-                    </div>
-                </div>
-            
-            {% endfor %}
+{{ creators|length}} {{ followed_creators|length }}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="creator-nav">
+                <button type="button" id="explore_button" class="creator-button" data-target="explore">Explore Creators</button>
+                <button type="button" id="followed_button" class="creator-button" data-target="followed">Followed Creators</button>
             </div>
         </div>
+    </div>
+
+    <div class="mt-4">
+        <div id="explore_creators" class="shown">
+            <div class="row">
+                {% for creator in creators %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card" style="width: 18rem;">
+                            <a href="{% url 'creator_aboutme' username=creator.user.username %}">
+                                {% if creator.avatar %}
+                                    <img class="card-img-top" src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="avatar">
+                                {% else %}
+                                    <img class="card-img-top" src="{% static 'images/placeholderavatar.png' %}" alt="{{ creator.user.username }}'s avatar" class="avatar">
+                                {% endif %}
+                            </a>
+                            <div class="card-body">
+                                <a href="{% url 'creator_aboutme' username=creator.user.username %}">
+                                    <h5 class="card-title">{{ creator.user.username }}</h5>
+                                </a>
+                                <p class="card-text">{{ creator.about_me|truncatewords:20 }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="followed_creators" class="hidden">
+            <div class="row">
+                {% if followed_creators %}
+                    {% for creator in followed_creators %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card" style="width: 18rem;">
+                                <a href="{% url 'creator_aboutme' username=creator.user.username %}">
+                                    {% if creator.avatar %}
+                                        <img class="card-img-top" src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="avatar">
+                                    {% else %}
+                                        <img class="card-img-top" src="{% static 'images/placeholderavatar.png' %}" alt="{{ creator.user.username }}'s avatar" class="avatar">
+                                    {% endif %}
+                                </a>
+                                <div class="card-body">
+                                    <a href="{% url 'creator_aboutme' username=creator.user.username %}">
+                                        <h5 class="card-title">{{ creator.user.username }}</h5>
+                                    </a>
+                                    <p class="card-text">{{ creator.about_me|truncatewords:20 }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% else %}
+                        <div class="col-12">
+                            <p>You are not following any creators yet.</p>
+                        </div>                
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+        /* ===== Creators page Explore/followed switch ====== */
+        document.addEventListener('DOMContentLoaded', function () {
+            const explore_button = document.getElementById('explore_button');
+            const followed_button = document.getElementById('followed_button');
+            const explore_creators = document.getElementById('explore_creators');
+            const followed_creators = document.getElementById('followed_creators');
+
+            explore_button.addEventListener('click', function () {
+                console.log("Explore button clicked");
+                explore_creators.classList.add('shown');
+                explore_creators.classList.remove('hidden');
+                followed_creators.classList.add('hidden');
+                followed_creators.classList.remove('shown');
+                console.log("Classes after clicking Explore button:", explore_creators.className, followed_creators.className);
+            });
+
+            followed_button.addEventListener('click', function () {
+                console.log("Followed button clicked");
+                followed_creators.classList.add('shown');
+                followed_creators.classList.remove('hidden');
+                explore_creators.classList.add('hidden');
+                explore_creators.classList.remove('shown');
+                console.log("Classes after clicking Followed button:", explore_creators.className, followed_creators.className);
+            });
+        });
+    </script>
 {% endblock %}

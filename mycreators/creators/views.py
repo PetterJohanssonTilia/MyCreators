@@ -49,10 +49,16 @@ def request_creator_status(request):
     if request.method == 'POST':
         form = CreatorRequestForm(request.POST)
         if form.is_valid():
-            creator = form.save(commit=False)
-            creator.user = request.user
-            creator.status = 'PENDING'
-            creator.save()
+            creator_type = form.cleaned_data['creator_type']
+            request_message = form.cleaned_data['request_message']
+            
+            Creator.objects.create(
+                user=request.user,
+                creator_type=creator_type,
+                about_me=request_message,
+                status='PENDING'
+            )
+
             return redirect('creator_request_submitted')
     else:
         form = CreatorRequestForm()

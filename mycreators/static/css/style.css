@@ -118,20 +118,18 @@ body {
 
 /* Switch between Explore/Followed */
 
-.creator-section {
-    display: none;
-}
 
-#explore-creators {
-    display: block;
-}
 
 .creator-button {
     background-color: turquoise;
 }
 
-.creator-button-active {
+.active {
     background-color: tomato;
+}
+
+.unactive {
+    background-color: turquoise;
 }
 
 /* Starts hidden  */

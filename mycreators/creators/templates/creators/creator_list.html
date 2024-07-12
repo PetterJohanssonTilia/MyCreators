@@ -6,8 +6,8 @@
     <div class="row justify-content-center">
         <div class="col-md-6 text-center">
             <div class="creator-nav">
-                <button type="button" id="explore_button" class="creator-button" data-target="explore">Explore Creators</button>
-                <button type="button" id="followed_button" class="creator-button" data-target="followed">Followed Creators</button>
+                <button type="button" id="explore_button" class="creator-button active" data-target="explore">Explore Creators</button>
+                <button type="button" id="followed_button" class="creator-button unactive" data-target="followed">Followed Creators</button>
             </div>
         </div>
     </div>
@@ -78,21 +78,25 @@
             const followed_creators = document.getElementById('followed_creators');
 
             explore_button.addEventListener('click', function () {
-                console.log("Explore button clicked");
                 explore_creators.classList.add('shown');
                 explore_creators.classList.remove('hidden');
+                explore_button.classList.add('active');
+                explore_button.classList.remove('unactive');
+                followed_button.classList.add('unactive');
+                followed_button.classList.remove('active');
                 followed_creators.classList.add('hidden');
-                followed_creators.classList.remove('shown');
-                console.log("Classes after clicking Explore button:", explore_creators.className, followed_creators.className);
+                followed_creators.classList.remove('shown');                
             });
 
             followed_button.addEventListener('click', function () {
-                console.log("Followed button clicked");
                 followed_creators.classList.add('shown');
                 followed_creators.classList.remove('hidden');
+                followed_button.classList.add('active');
+                followed_button.classList.remove('unactive');
+                explore_button.classList.add('unactive');
+                explore_button.classList.remove('active');
                 explore_creators.classList.add('hidden');
                 explore_creators.classList.remove('shown');
-                console.log("Classes after clicking Followed button:", explore_creators.className, followed_creators.className);
             });
         });
     </script>

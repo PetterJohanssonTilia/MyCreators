@@ -21,6 +21,10 @@ body {
     width: 70vw;
 }
 
+.navbarcontainer-fluid {
+    flex-wrap: nowrap;
+}
+
 /* =============== Index =============== */
 .jumbotron {
     background-image:

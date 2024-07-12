@@ -11,13 +11,22 @@
             </div>
         </div>
     </div>
-
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-8">
+            <div class="filter-buttons text-center">
+                <button class="filter-btn active" data-filter="all">All</button>
+                {% for type_key, type_name in creator_types.items %}
+                    <button class="filter-btn" data-filter="{{ type_key }}">{{ type_name }}</button>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
     <div class="mt-4">
         <div id="explore_creators" class="shown">
             <div class="row">
                 {% for creator in creators %}
                     <div class="col-md-4 mb-4">
-                        <div class="card" style="width: 18rem;">
+                        <div class="card creator-item" data-type="{{ creator.creator_type }}" style="width: 18rem;">
                             <a href="{% url 'creator_aboutme' username=creator.user.username %}">
                                 {% if creator.avatar %}
                                     <img class="card-img-top" src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="avatar">
@@ -70,7 +79,7 @@
 {% endblock %}
 {% block extra_scripts %}
     <script>
-        /* ===== Creators page Explore/followed switch ====== */
+        /* ===== Explore/Followed switch ====== */
         document.addEventListener('DOMContentLoaded', function () {
             const explore_button = document.getElementById('explore_button');
             const followed_button = document.getElementById('followed_button');
@@ -97,6 +106,26 @@
                 explore_button.classList.remove('active');
                 explore_creators.classList.add('hidden');
                 explore_creators.classList.remove('shown');
+            });
+        /* ===== Creator type tags buttons ====== */
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const creatorItems = document.querySelectorAll('.creator-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+
+                    creatorItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-type') === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
             });
         });
     </script>

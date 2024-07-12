@@ -45,6 +45,7 @@ class CreatorListView(ListView):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             context['followed_creators'] = Creator.objects.filter(followers=self.request.user)
+        context['creator_types'] = dict(Creator.CREATOR_TYPES)
         return context
     
 #Request to become creator

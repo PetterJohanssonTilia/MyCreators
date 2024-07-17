@@ -37,13 +37,13 @@
                     <div class="form-group">
                         <textarea name="content" class="form-control" rows="3" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                    <button type="submit" class="btn pink">Submit</button>
                 </form>
             {% else %}
                 <p class="mt-4">Please <a href="{% url 'login' %}">login</a> to comment.</p>
             {% endif %}
 
-            <a href="{% url 'personalized_feed' %}" class="btn btn-secondary mt-4">Back to feed</a>
+            <a href="{% url 'personalized_feed' %}" class="btn purple mt-4">Back to feed</a>
         </div>
     </div>
 </div>

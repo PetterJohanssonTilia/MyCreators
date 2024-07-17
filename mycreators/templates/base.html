@@ -62,33 +62,33 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
           {% if user.is_authenticated %}
-          {% creator_status user as status %}
-          <ul class="navbar-nav ml-auto">
-            {% if status == 'APPROVED' %}
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  My Page
-                </a>
-                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'creator_aboutme' user.username %}">My Page</a>
-                  <a class="dropdown-item" href="{% url 'edit_creator_aboutme' %}">Edit My Page</a>
-                  <a class="dropdown-item" href="{% url 'create_post' %}">New Post</a>
-                  <div class="dropdown-divider"></div>
+            {% creator_status user as status %}
+            <ul class="navbar-nav ml-auto">
+              {% if status == 'APPROVED' %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    My Page
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'creator_aboutme' user.username %}">My Page</a>
+                    <a class="dropdown-item" href="{% url 'edit_creator_aboutme' %}">Edit My Page</a>
+                    <a class="dropdown-item" href="{% url 'create_post' %}">New Post</a>
+                    <div class="dropdown-divider"></div>
+                    <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                      {% csrf_token %}
+                      <button type="submit" class="dropdown-item">Logout</button>
+                    </form>
+                  </div>
+                </li>
+              {% else %}
+                <li class="nav-item">
                   <form method="post" action="{% url 'logout' %}" style="display:inline;">
                     {% csrf_token %}
-                    <button type="submit" class="dropdown-item">Logout</button>
+                    <button type="submit" class="nav-link btn btn-link" style="display:inline; padding: 0;">Logout</button>
                   </form>
-                </div>
-              </li>
-            {% else %}
-              <li class="nav-item">
-                <form method="post" action="{% url 'logout' %}" style="display:inline;">
-                  {% csrf_token %}
-                  <button type="submit" class="nav-link btn btn-link" style="display:inline; padding: 0;">Logout</button>
-                </form>
-              </li>
-            {% endif %}
-          </ul>
+                </li>
+              {% endif %}
+            </ul>
           {% endif %}
         </div>
       </div>

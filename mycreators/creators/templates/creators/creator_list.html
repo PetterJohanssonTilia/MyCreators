@@ -52,7 +52,7 @@
                 {% if followed_creators %}
                     {% for creator in followed_creators %}
                         <div class="col-md-4 mb-4">
-                            <div class="card" style="width: 18rem;">
+                            <div class="card creator-item" data-type="{{ creator.creator_type }}" style="width: 18rem;">
                                 <a href="{% url 'creator_aboutme' username=creator.user.username %}">
                                     {% if creator.avatar %}
                                         <img class="card-img-top" src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="avatar">
@@ -69,10 +69,10 @@
                             </div>
                         </div>
                     {% endfor %}
-                    {% else %}
-                        <div class="col-12">
-                            <p>You are not following any creators yet.</p>
-                        </div>                
+                {% else %}
+                    <div class="col-12">
+                        <p>You are not following any creators yet.</p>
+                    </div>                
                 {% endif %}
             </div>
         </div>
@@ -122,7 +122,6 @@
 {% endblock %}
 {% block extra_scripts %}
     <script>
-        /* ===== Explore/Followed/Pending switch ====== */
         document.addEventListener('DOMContentLoaded', function () {
             const pending_button = document.getElementById('pending_button');
             const explore_button = document.getElementById('explore_button');
@@ -130,62 +129,13 @@
             const explore_creators = document.getElementById('explore_creators');
             const followed_creators = document.getElementById('followed_creators');
             const pending_creators = document.getElementById('pending_creators');
-
-            explore_button.addEventListener('click', function () {
-                explore_creators.classList.add('shown');
-                explore_creators.classList.remove('hidden');
-                explore_button.classList.add('active');
-                explore_button.classList.remove('unactive');
-                followed_button.classList.add('unactive');
-                followed_button.classList.remove('active');
-                followed_creators.classList.add('hidden');
-                followed_creators.classList.remove('shown');
-                pending_creators.classList.add('hidden');
-                pending_creators.classList.remove('shown');
-                pending_button.classList.add('unactive');
-                pending_button.classList.remove('active');        
-            });
-
-            followed_button.addEventListener('click', function () {
-                followed_creators.classList.add('shown');
-                followed_creators.classList.remove('hidden');
-                followed_button.classList.add('active');
-                followed_button.classList.remove('unactive');
-                explore_button.classList.add('unactive');
-                explore_button.classList.remove('active');
-                explore_creators.classList.add('hidden');
-                explore_creators.classList.remove('shown');
-                pending_creators.classList.add('hidden');
-                pending_creators.classList.remove('shown');
-                pending_button.classList.add('unactive');
-                pending_button.classList.remove('active');
-            });
-
-            pending_button.addEventListener('click', function () {
-                pending_button.classList.add('active');
-                pending_button.classList.remove('unactive');
-                pending_creators.classList.add('shown');
-                pending_creators.classList.remove('hidden');
-                followed_creators.classList.add('hidden');
-                followed_creators.classList.remove('shown');
-                followed_button.classList.add('unactive');
-                followed_button.classList.remove('active');
-                explore_button.classList.add('unactive');
-                explore_button.classList.remove('active');
-                explore_creators.classList.add('hidden');
-                explore_creators.classList.remove('shown');
-            });
-        /* ===== Creator type tags buttons ====== */
             const filterButtons = document.querySelectorAll('.filter-btn');
-            const creatorItems = document.querySelectorAll('.creator-item');
 
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const filter = this.getAttribute('data-filter');
-
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-
+            function applyFilter(activeSection) {
+                const activeFilter = document.querySelector('.filter-btn.active');
+                if (activeFilter && activeSection) {
+                    const filter = activeFilter.getAttribute('data-filter');
+                    const creatorItems = activeSection.querySelectorAll('.creator-item');
                     creatorItems.forEach(item => {
                         if (filter === 'all' || item.getAttribute('data-type') === filter) {
                             item.style.display = 'block';
@@ -193,8 +143,48 @@
                             item.style.display = 'none';
                         }
                     });
+                }
+            }
+
+            function switchTab(activeButton, activeSection) {
+                [explore_button, followed_button, pending_button].forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.classList.add('unactive');
+                });
+                [explore_creators, followed_creators, pending_creators].forEach(section => {
+                    section.classList.remove('shown');
+                    section.classList.add('hidden');
+                });
+                activeButton.classList.add('active');
+                activeButton.classList.remove('unactive');
+                activeSection.classList.add('shown');
+                activeSection.classList.remove('hidden');
+                applyFilter(activeSection);
+            }
+
+            explore_button.addEventListener('click', () => switchTab(explore_button, explore_creators));
+            followed_button.addEventListener('click', () => switchTab(followed_button, followed_creators));
+            pending_button.addEventListener('click', () => switchTab(pending_button, pending_creators));
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    let activeSection;
+                    if (explore_creators.classList.contains('shown')) {
+                        activeSection = explore_creators;
+                    } else if (followed_creators.classList.contains('shown')) {
+                        activeSection = followed_creators;
+                    } else if (pending_creators.classList.contains('shown')) {
+                        activeSection = pending_creators;
+                    }
+                    
+                    applyFilter(activeSection);
                 });
             });
+                        
+            applyFilter(explore_creators);
         });
     </script>
 {% endblock %}

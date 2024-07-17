@@ -7,6 +7,22 @@ body {
 
 }
 
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #000;
+}
+
+a:hover {
+    color: #000;
+}
+
+a:active {
+    color: #000;
+}
 
 .title {
     text-align: center;
@@ -24,6 +40,16 @@ body {
 
 .navbarcontainer-fluid {
     flex-wrap: nowrap;
+}
+
+
+/* =============== Colors =============== */
+.purple {
+    background-color: #8B5CF6;
+}
+
+.pink {
+    background-color: #EC4899;
 }
 
 /* =============== Index =============== */
@@ -140,11 +166,11 @@ body {
 }
 
 .active {
-    background-color: tomato;
+    background-color: #EC4899;
 }
 
 .unactive {
-    background-color: turquoise;
+    background-color: #ec489a7f;
 }
 
 /* Starts hidden  */

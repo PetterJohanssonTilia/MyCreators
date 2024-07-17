@@ -71,7 +71,7 @@
         <div class="col-lg-8 d-flex justify-content-end align-items-center">
           <form class="form-inline my-2 my-lg-0 d-none d-md-block" action="{% url 'creator_list' %}" method="GET">
             <input class="form-control mr-sm-2" type="search" placeholder="Search creators" aria-label="Search" name="search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn pink" type="submit">Search</button>
           </form>
           {% if user.is_authenticated %}
             {% creator_status user as status %}

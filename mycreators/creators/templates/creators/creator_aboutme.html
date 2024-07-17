@@ -1,45 +1,62 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}{{ creator.user.username }}'s Page{% endblock %}
 
 {% block content %}
-    {% if user == creator.user %}
-    <a href="{% url 'edit_creator_aboutme' %}">Edit About Me</a>
-    {% endif %}
-    <h1>{{ creator.user.username }}'s Page</h1>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12 text-center mb-4">
+            <h1>{{ creator.user.username }}'s Page</h1>
+        </div>
+    </div>
 
-    {% if creator.avatar %}
-    <img
-      src="{{ creator.avatar.url }}"
-      alt="{{ creator.user.username }}'s avatar"
-    />
-    {% endif %}
+    <div class="row">
+        <!-- Left Side -->
+        <div class="col-md-6">
+            {% if creator.avatar %}
+            <img src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="img-fluid mb-3">
+            {% endif %}
 
-    <h2>About Me</h2>
-    <p>{{ creator.about_me }}</p>
+            <h2>About Me</h2>
+            <p>{{ creator.about_me }}</p>
 
-    {% if user.is_authenticated %} {% if is_following %}
-    <a href="{% url 'unfollow_creator' creator.pk %}">Unfollow</a>
-    {% else %}
-    <a href="{% url 'follow_creator' creator.pk %}">Follow</a>
-    {% endif %} {% endif %}
-
-    <h2>Posts</h2>
-    {% if user == creator.user %}
-        <a href="{% url 'create_post' %}">Create New Post</a>
-    {% endif %}
-    
-    {% for post in posts %}
-        <div>
-            <h3>{{ post.title }}</h3>
-            <p>{{ post.content }}</p>
-            <p>Posted on: {{ post.created_at }}</p>
             {% if user == creator.user %}
-                <a href="{% url 'edit_post' pk=post.pk %}">Edit</a>
-                <a href="{% url 'delete_post' pk=post.pk %}">Delete</a>
+            <a href="{% url 'edit_creator_aboutme' %}" class="btn btn-primary">Edit About Me</a>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+                {% if is_following %}
+                <a href="{% url 'unfollow_creator' creator.pk %}" class="btn btn-secondary">Unfollow</a>
+                {% else %}
+                <a href="{% url 'follow_creator' creator.pk %}" class="btn btn-primary">Follow</a>
+                {% endif %}
             {% endif %}
         </div>
-    {% empty %}
-        <p>No posts yet.</p>
-    {% endfor %}
+
+        <!-- Right Side -->
+        <div class="col-md-6">
+            <h2>Posts</h2>
+            {% if user == creator.user %}
+            <a href="{% url 'create_post' %}" class="btn btn-success mb-3">Create New Post</a>
+            {% endif %}
+
+            {% for post in posts %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h3 class="card-title">{{ post.title }}</h3>
+                    <p class="card-text">{{ post.content }}</p>
+                    <p class="card-text"><small class="text-muted">Posted on: {{ post.created_at }}</small></p>
+                    {% if user == creator.user %}
+                    <a href="{% url 'edit_post' pk=post.pk %}" class="btn btn-sm btn-primary">Edit</a>
+                    <a href="{% url 'delete_post' pk=post.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p>No posts yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}

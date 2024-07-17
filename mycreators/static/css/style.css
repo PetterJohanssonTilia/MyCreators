@@ -7,6 +7,7 @@ body {
 
 }
 
+
 .title {
     text-align: center;
     margin-top: 20px;
@@ -26,6 +27,12 @@ body {
 }
 
 /* =============== Index =============== */
+.jumbotron-text {
+    font-family: "Anton SC", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 .jumbotron {
     background-image:
         linear-gradient(to top right, #8B5CF6, #EC4899);
@@ -95,6 +102,13 @@ body {
     font-family: monospace;
     font-weight: bold;
     left: 10vw;
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+    z-index: 999;
+    outline: none;
 
 }
 
@@ -143,4 +157,66 @@ div.hidden,
 /* Click to Show  */
 .shown {
     display: block;
+}
+
+/* =============== Media Queries =============== */
+
+/* Default font size */
+.jumbotron-text {
+    font-size: 4rem;
+}
+
+/* Smallest devices*/
+@media (min-width: 0px) {
+    .item {
+        top: 5vh;
+    }
+
+    #next {
+        right: 0vw;
+    }
+
+    #prev {
+        left: 0vw;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .jumbotron-text {
+        font-size: 5rem;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .jumbotron-text {
+        font-size: 6rem;
+    }
+
+    .item {
+        top: 15vh;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .jumbotron-text {
+        font-size: 7rem;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .jumbotron-text {
+        font-size: 8rem;
+    }
+
+    #next {
+        right: 15vw;
+    }
+
+    #prev {
+        left: 15vw;
+    }
 }

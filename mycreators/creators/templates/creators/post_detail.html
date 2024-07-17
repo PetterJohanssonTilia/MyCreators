@@ -1,36 +1,50 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{{ post.creator.user.username }}'s post</h1>
-    <p>{{ post.content }}</p>
-    <small>Posted on: {{ post.created_at }}</small>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">{{ post.creator.user.username }}'s post</h1>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <p class="card-text">{{ post.content }}</p>
+                    <small class="text-muted">Posted on: {{ post.created_at }}</small>
+                </div>
+            </div>
 
-    <h2>Comments</h2>
-    {% for comment in post.comments %}
-        <div>
-            <p>{{ comment.content }}</p>
-            <small>By {{ comment.username }} on {{ comment.created_at|slice:":10" }}</small>
-            {% if user.id == comment.user_id %}
-                <form method="post" action="{% url 'delete_comment' post.id comment.id %}">
+            <h2 class="mb-3">Comments</h2>
+            {% for comment in post.comments %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <p class="card-text">{{ comment.content }}</p>
+                        <small class="text-muted">By {{ comment.username }} on {{ comment.created_at|slice:":10" }}</small>
+                        {% if user.id == comment.user_id %}
+                            <form method="post" action="{% url 'delete_comment' post.id comment.id %}" class="mt-2">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            {% empty %}
+                <p>No comments yet.</p>
+            {% endfor %}
+
+            {% if user.is_authenticated %}
+                <h3 class="mt-4 mb-3">Add a comment</h3>
+                <form method="post" action="{% url 'add_comment' post.id %}">
                     {% csrf_token %}
-                    <button type="submit">Delete</button>
+                    <div class="form-group">
+                        <textarea name="content" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
                 </form>
+            {% else %}
+                <p class="mt-4">Please <a href="{% url 'login' %}">login</a> to comment.</p>
             {% endif %}
+
+            <a href="{% url 'personalized_feed' %}" class="btn btn-secondary mt-4">Back to feed</a>
         </div>
-    {% empty %}
-        <p>No comments yet.</p>
-    {% endfor %}
-
-    {% if user.is_authenticated %}
-        <h3>Add a comment</h3>
-        <form method="post" action="{% url 'add_comment' post.id %}">
-            {% csrf_token %}
-            <textarea name="content" required></textarea>
-            <button type="submit">Submit</button>
-        </form>
-    {% else %}
-        <p>Please <a href="{% url 'login' %}">login</a> to comment.</p>
-    {% endif %}
-
-    <a href="{% url 'personalized_feed' %}">Back to feed</a>
+    </div>
+</div>
 {% endblock %}

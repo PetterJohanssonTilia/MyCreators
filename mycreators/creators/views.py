@@ -31,7 +31,7 @@ class CreatorListView(ListView):
     
     #Search creators
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = super().get_queryset().filter(status='APPROVED')
         search_query = self.request.GET.get('search')
         #Search creators with username and about me information
         if search_query:

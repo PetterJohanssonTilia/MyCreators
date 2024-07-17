@@ -46,6 +46,10 @@ class CreatorListView(ListView):
         if self.request.user.is_authenticated:
             context['followed_creators'] = Creator.objects.filter(followers=self.request.user)
         context['creator_types'] = dict(Creator.CREATOR_TYPES)
+        
+        if self.request.user.is_staff or self.request.user.is_superuser:
+            context['pending_creators'] = Creator.objects.filter(status='PENDING').exclude(about_me='')
+        
         return context
     
 #Request to become creator
@@ -78,10 +82,8 @@ def creator_request_submitted(request):
 @login_required
 def creator_status(request):
     creator = Creator.objects.get(user=request.user)
-    pending_creators = Creator.objects.filter(status='PENDING').exclude(about_me='')
     return render(request, 'creators/creator_status.html', {
         'creator': creator,
-        'pending_creators': pending_creators
         })
 
 # Admin - Accept/Reject creators
@@ -94,7 +96,7 @@ def approve_creator(_request, username):
     creator = get_object_or_404(Creator, user__username=username, status='PENDING')
     creator.status = 'APPROVED'
     creator.save()
-    return redirect('creator_status')
+    return redirect('creator_list')
 
 @login_required
 @user_passes_test(is_staff_or_superuser)
@@ -102,7 +104,7 @@ def reject_creator(_request, username):
     creator = get_object_or_404(Creator, user__username=username, status='PENDING')
     creator.status = 'REJECTED'
     creator.save()
-    return redirect('creator_status')
+    return redirect('creator_list')
     
 #================= Sign up / Delete =================
 

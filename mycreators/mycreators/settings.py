@@ -133,7 +133,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Summer note (text editor)
 SUMMERNOTE_CONFIG = {
-    'width': '100%',
+    'width': '80%',
     'height': '480',
 }
 

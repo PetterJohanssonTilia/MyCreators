@@ -24,5 +24,7 @@ urlpatterns = [
     path('post/<int:post_id>/comment/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
     path('request-creator/', views.request_creator_status, name='request_creator_status'),
     path('request-submitted/', views.creator_request_submitted, name='creator_request_submitted'),
+    path('approve_creator/<str:username>/', views.approve_creator, name='approve_creator'),
+    path('reject_creator/<str:username>/', views.reject_creator, name='reject_creator'),
     
 ]

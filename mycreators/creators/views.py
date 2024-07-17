@@ -78,8 +78,32 @@ def creator_request_submitted(request):
 @login_required
 def creator_status(request):
     creator = Creator.objects.get(user=request.user)
-    return render(request, 'creators/creator_status.html', {'creator': creator})
+    pending_creators = Creator.objects.filter(status='PENDING').exclude(about_me='')
+    return render(request, 'creators/creator_status.html', {
+        'creator': creator,
+        'pending_creators': pending_creators
+        })
 
+# Admin - Accept/Reject creators
+def is_staff_or_superuser(user):
+    return user.is_staff or user.is_superuser
+
+@login_required
+@user_passes_test(is_staff_or_superuser)
+def approve_creator(_request, username):
+    creator = get_object_or_404(Creator, user__username=username, status='PENDING')
+    creator.status = 'APPROVED'
+    creator.save()
+    return redirect('creator_status')
+
+@login_required
+@user_passes_test(is_staff_or_superuser)
+def reject_creator(_request, username):
+    creator = get_object_or_404(Creator, user__username=username, status='PENDING')
+    creator.status = 'REJECTED'
+    creator.save()
+    return redirect('creator_status')
+    
 #================= Sign up / Delete =================
 
 #Register
@@ -228,6 +252,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     
     def get_success_url(self):
         return reverse_lazy('creator_aboutme', kwargs={'username': self.request.user.username})
+
 #Edit Post
 class EditPostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post

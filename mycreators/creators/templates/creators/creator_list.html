@@ -7,6 +7,9 @@
             <div class="creator-nav">
                 <button type="button" id="explore_button" class="creator-button active" data-target="explore">Explore Creators</button>
                 <button type="button" id="followed_button" class="creator-button unactive" data-target="followed">Followed Creators</button>
+                {% if user.is_superuser or user.is_staff %}
+                    <button type="button" id="pending_button" class="creator-button unactive" data-target="pending">Pending Creators</button>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -73,17 +76,60 @@
                 {% endif %}
             </div>
         </div>
+    {% if user.is_superuser or user.is_staff %}
+        <div id="pending_creators" class="hidden">
+            <div class="row">
+                {% if pending_creators %}
+                    {% for creator in pending_creators %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card" style="width: 18rem;">
+                                <a href="{% url 'creator_aboutme' username=creator.user.username %}">
+                                    {% if creator.avatar %}
+                                        <img class="card-img-top" src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="avatar">
+                                    {% else %}
+                                        <img class="card-img-top" src="{% static 'images/placeholderavatar.png' %}" alt="{{ creator.user.username }}'s avatar" class="avatar">
+                                    {% endif %}
+                                </a>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ creator.user.username }}</h5>
+                                    <p class="card-text"><strong>Status:</strong> PENDING</p>
+                                    <p class="card-text"><strong>Request Message:</strong></p>
+                                    <p class="card-text">{{ creator.about_me|truncatewords:30 }}</p>
+                                    <form action="{% url 'approve_creator' username=creator.user.username %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                                    </form>
+                                    <form action="{% url 'reject_creator' username=creator.user.username %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12">
+                        <p>There are no pending creator requests.</p>
+                    </div>                
+            {% endif %}
+            </div>
+        </div>
+    {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
 {% block extra_scripts %}
     <script>
-        /* ===== Explore/Followed switch ====== */
+        /* ===== Explore/Followed/Pending switch ====== */
         document.addEventListener('DOMContentLoaded', function () {
+            const pending_button = document.getElementById('pending_button');
             const explore_button = document.getElementById('explore_button');
             const followed_button = document.getElementById('followed_button');
             const explore_creators = document.getElementById('explore_creators');
             const followed_creators = document.getElementById('followed_creators');
+            const pending_creators = document.getElementById('pending_creators');
 
             explore_button.addEventListener('click', function () {
                 explore_creators.classList.add('shown');
@@ -93,7 +139,11 @@
                 followed_button.classList.add('unactive');
                 followed_button.classList.remove('active');
                 followed_creators.classList.add('hidden');
-                followed_creators.classList.remove('shown');                
+                followed_creators.classList.remove('shown');
+                pending_creators.classList.add('hidden');
+                pending_creators.classList.remove('shown');
+                pending_button.classList.add('unactive');
+                pending_button.classList.remove('active');        
             });
 
             followed_button.addEventListener('click', function () {
@@ -101,6 +151,25 @@
                 followed_creators.classList.remove('hidden');
                 followed_button.classList.add('active');
                 followed_button.classList.remove('unactive');
+                explore_button.classList.add('unactive');
+                explore_button.classList.remove('active');
+                explore_creators.classList.add('hidden');
+                explore_creators.classList.remove('shown');
+                pending_creators.classList.add('hidden');
+                pending_creators.classList.remove('shown');
+                pending_button.classList.add('unactive');
+                pending_button.classList.remove('active');
+            });
+
+            pending_button.addEventListener('click', function () {
+                pending_button.classList.add('active');
+                pending_button.classList.remove('unactive');
+                pending_creators.classList.add('shown');
+                pending_creators.classList.remove('hidden');
+                followed_creators.classList.add('hidden');
+                followed_creators.classList.remove('shown');
+                followed_button.classList.add('unactive');
+                followed_button.classList.remove('active');
                 explore_button.classList.add('unactive');
                 explore_button.classList.remove('active');
                 explore_creators.classList.add('hidden');

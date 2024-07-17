@@ -41,16 +41,23 @@
                 {% endif %}
                 <li class="nav-item">
                   <span class="navbar-text">
-                    {% creator_status user as status %}
-                    {% if status == 'REJECTED' %}
-                      Creator status: REJECTED
-                    {% elif status == 'PENDING' %}
-                      Creator status: PENDING
-                    {% elif status == 'APPROVED' %}
-                    {% else %}
-                      <a href="{% url 'request_creator_status' %}">Become a Creator</a>
+                    {% if user.is_authenticated %}
+                        {% creator_status user as status %}
+                        {% if status %}
+                            {% if status == 'REJECTED' %}
+                                Creator status: REJECTED
+                            {% elif status == 'PENDING' %}
+                                Creator status: PENDING
+                            {% elif status == 'APPROVED' %}
+                              {% comment %}
+                                No content will be displayed for APPROVED status.
+                              {% endcomment %}
+                            {% endif %}
+                        {% else %}
+                            <a href="{% url 'request_creator_status' %}">Become a Creator</a>
+                        {% endif %}
                     {% endif %}
-                  </span>
+                </span>
                 </li>
               </ul>      
             </div>

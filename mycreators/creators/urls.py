@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from .views import(
     IndexView,
@@ -26,5 +26,6 @@ urlpatterns = [
     path('request-submitted/', views.creator_request_submitted, name='creator_request_submitted'),
     path('approve_creator/<str:username>/', views.approve_creator, name='approve_creator'),
     path('reject_creator/<str:username>/', views.reject_creator, name='reject_creator'),
+    path("accounts/", include("allauth.urls")),
     
 ]

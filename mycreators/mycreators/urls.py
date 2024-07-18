@@ -28,4 +28,5 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page=''), name='logout'),
     path('register/', creator_views.register, name='register'),
     path('summernote/', include('django_summernote.urls')),
+    path("accounts/", include("allauth.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

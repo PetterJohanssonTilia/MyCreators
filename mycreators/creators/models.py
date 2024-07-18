@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -23,7 +23,8 @@ class Creator(models.Model):
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to='creator_avatars/', null=True, blank=True)
+    avatar = CloudinaryField('image', null=True, blank=True)
+    #avatar = models.ImageField(upload_to='creator_avatars/', null=True, blank=True)
     about_me = models.TextField(blank=True)
     creator_type = models.CharField(max_length=20, choices=CREATOR_TYPES, default='OTHER')
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')

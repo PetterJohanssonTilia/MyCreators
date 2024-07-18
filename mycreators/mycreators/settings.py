@@ -9,12 +9,22 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+
 import os
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+if os.path.exists(os.path.join(BASE_DIR, 'env.py')):
+    import env
+    print("env.py imported")
+    print("CLOUDINARY_URL:", os.environ.get('CLOUDINARY_URL'))
+else:
+    print("env.py not found")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -37,9 +47,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
     'creators',
     'bootstrap4',
     'django_summernote',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'mycreators.urls'
@@ -102,6 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -138,8 +156,23 @@ SUMMERNOTE_CONFIG = {
 }
 
 # Login / Logout
+SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/' 
 
 #Message storage
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+cloudinary.config( 
+  cloud_name = "your_cloud_name", 
+  api_key = "your_api_key", 
+  api_secret = "your_api_secret" 
+)
+
+# Cloudinary configuration
+cloudinary.config(
+    cloud_name = os.environ.get('CLOUDINARY_URL', '').split('@')[-1],
+    api_key = os.environ.get('CLOUDINARY_URL', '').split('@')[0].split('//')[1].split(':')[0],
+    api_secret = os.environ.get('CLOUDINARY_URL', '').split('@')[0].split('//')[1].split(':')[1]
+)
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

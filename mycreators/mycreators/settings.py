@@ -10,32 +10,36 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+
+
 import os
 from pathlib import Path
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+import dj_database_url
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mycreators-16482e844e2d.herokuapp.com']
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 if os.path.exists(os.path.join(BASE_DIR, 'env.py')):
     import env
-    print("env.py imported")
-    print("CLOUDINARY_URL:", os.environ.get('CLOUDINARY_URL'))
 else:
     print("env.py not found")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-o6hzh39(r2%ah0%(0+umm_a6o_xs(abeh))&*ef5tr03&ncot1'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -90,16 +94,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mycreators.wsgi.application'
 
 
-# Database
+# Database sqlite locally and postgressql on heroku
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {'default': dj_database_url.config(default=os.environ['DATABASE_URL'])}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -176,3 +182,7 @@ cloudinary.config(
     api_secret = os.environ.get('CLOUDINARY_URL', '').split('@')[0].split('//')[1].split(':')[1]
 )
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get('SECRET_KEY')
+

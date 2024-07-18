@@ -67,7 +67,7 @@ def request_creator_status(request):
             Creator.objects.create(
                 user=request.user,
                 creator_type=creator_type,
-                about_me=request_message,
+                request_message=request_message,
                 status='PENDING'
             )
 

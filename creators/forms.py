@@ -22,7 +22,10 @@ class CreatorRequestForm(forms.Form):
     ]
     creator_type = forms.ChoiceField(choices=CREATOR_TYPES)
     request_message = forms.CharField(widget=forms.Textarea)
-
+    avatar = forms.ImageField(required=False)
+    class Meta:
+        model = Creator
+        fields = ['creator_type', 'request_message', 'avatar']
 
 class CreatorProfileForm(forms.ModelForm):
     class Meta:

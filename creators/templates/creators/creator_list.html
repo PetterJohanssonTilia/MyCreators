@@ -28,7 +28,7 @@
         <div id="explore_creators" class="shown creator-container">
             <div class="creators-row">
                 {% for creator in creators %}
-                    <div class="col-md-4 mb-4 creator-col">
+                    <div class="col mb-4 creator-col">
                         <div class="card creator-item" data-type="{{ creator.creator_type }}" style="width: 18rem;">
                             <a href="{% url 'creator_aboutme' username=creator.user.username %}">
                                 {% if creator.avatar %}

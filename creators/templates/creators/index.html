@@ -6,8 +6,15 @@
 {% block content %}
 <div class="jumbotron">
   <p class="lead">A personalized creators platform</p>
-  <h1 class="jumbotron-text">Find Creators.</h1>
-  <h1 class="jumbotron-text">Connect.</h1>
+  <div class="row d-flex flex-wrap">
+    <div class="col-lg-6">
+      <h1 class="jumbotron-text">Find Creators.</h1></br>
+      <h1 class="jumbotron-text">Connect.</h1>
+    </div> 
+    <div class="mt-4 col-lg-6 d-flex justify-content-center">
+      <img class="img-fluid" id="jumbotron-logo" src="/static/images/mycreatorslogo.png">
+    </div> 
+  </div>
   <div class="slider">
     {% for creator in creators %}
       <div class="item">

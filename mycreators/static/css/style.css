@@ -59,6 +59,10 @@ a:active {
     width: 70vw;
 }
 
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
 
 /* =============== Colors =============== */
 .purple {
@@ -74,6 +78,9 @@ a:active {
     font-family: "Anton SC", sans-serif;
     font-weight: 400;
     font-style: normal;
+    position: relative;
+    left: 20%;
+    margin: auto;
 }
 
 .jumbotron {
@@ -168,14 +175,36 @@ a:active {
 .creators-row {
     display: flex;
     flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    justify-items: center;
 }
+
+.creators-btn-container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 
 .creator-col {
     display: flex;
+    margin: auto;
+    justify-content: center;
 }
 
-.creator-item {
-    width: 100%;
+.creator-item a img {
+    min-height: 188px;
+    max-height: 188px;
+    width: auto;
+    max-width: 100%;
+
+}
+
+.card-body {
+    max-height: 133px;
+    min-height: 133px;
 }
 
 /* Switch between Explore/Followed */
@@ -184,6 +213,8 @@ a:active {
 
 .creator-button {
     background-color: turquoise;
+    font-size: large;
+    margin-right: 20px;
 }
 
 .active {

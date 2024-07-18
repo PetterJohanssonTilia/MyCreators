@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6 text-center">
-            <div class="creator-nav">
-                <button type="button" id="explore_button" class="creator-button active" data-target="explore">Explore Creators</button>
-                <button type="button" id="followed_button" class="creator-button unactive" data-target="followed">Followed Creators</button>
+<div class="container-fluid mt-5">
+    <div class="row justify-content-between mb-5">
+        <div class="col-12">
+            <div class="creators-btn-container d-flex">
+                <button type="button" id="explore_button" class="creator-button active flex-grow-1" data-target="explore">Explore Creators</button>
+                <button type="button" id="followed_button" class="creator-button unactive flex-grow-1" data-target="followed">Followed Creators</button>
                 {% if user.is_superuser or user.is_staff %}
-                    <button type="button" id="pending_button" class="creator-button unactive" data-target="pending">Pending Creators</button>
+                    <button type="button" id="pending_button" class="creator-button unactive flex-grow-1" data-target="pending">Pending Creators</button>
                 {% endif %}
             </div>
         </div>
     </div>
-    <div class="row justify-content-center mt-3">
+
+    <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="filter-buttons text-center">
                 <button class="filter-btn active" data-filter="all">All</button>
@@ -23,9 +24,9 @@
             </div>
         </div>
     </div>
-    <div class="mt-4">
+    <div class="mt-4 d-flex justify-content-center">
         <div id="explore_creators" class="shown creator-container">
-            <div class="row creators-row">
+            <div class="creators-row">
                 {% for creator in creators %}
                     <div class="col-md-4 mb-4 creator-col">
                         <div class="card creator-item" data-type="{{ creator.creator_type }}" style="width: 18rem;">

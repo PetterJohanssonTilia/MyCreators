@@ -245,6 +245,26 @@ div.hidden,
     display: block;
 }
 
+/* =============== Post content =============== */
+
+
+.post-body {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    max-height: 133px;
+    min-height: 133px;
+}
+
+.post-body img {
+    max-width: 100%;
+    max-height: 5vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
 /* =============== Media Queries =============== */
 
 /* Default font size */

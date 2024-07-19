@@ -152,11 +152,19 @@
             }
 
             function switchTab(activeButton, activeSection) {
-                [explore_button, followed_button, pending_button].forEach(btn => {
+                const buttons = [explore_button, followed_button];
+                const sections = [explore_creators, followed_creators];
+                
+                if (pending_button) {
+                    buttons.push(pending_button);
+                    sections.push(pending_creators);
+                }
+
+                buttons.forEach(btn => {
                     btn.classList.remove('active');
                     btn.classList.add('unactive');
                 });
-                [explore_creators, followed_creators, pending_creators].forEach(section => {
+                sections.forEach(section => {
                     section.classList.remove('shown');
                     section.classList.add('hidden');
                 });
@@ -169,7 +177,9 @@
 
             explore_button.addEventListener('click', () => switchTab(explore_button, explore_creators));
             followed_button.addEventListener('click', () => switchTab(followed_button, followed_creators));
-            pending_button.addEventListener('click', () => switchTab(pending_button, pending_creators));
+            if (pending_button) {
+                pending_button.addEventListener('click', () => switchTab(pending_button, pending_creators));
+            }
 
             filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -181,7 +191,7 @@
                         activeSection = explore_creators;
                     } else if (followed_creators.classList.contains('shown')) {
                         activeSection = followed_creators;
-                    } else if (pending_creators.classList.contains('shown')) {
+                    } else if (pending_creators && pending_creators.classList.contains('shown')) {
                         activeSection = pending_creators;
                     }
                     

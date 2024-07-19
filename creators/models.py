@@ -24,7 +24,6 @@ class Creator(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = CloudinaryField('image', null=True, blank=True, default=None)
-    #avatar = models.ImageField(upload_to='creator_avatars/', null=True, blank=True)
     about_me = models.TextField(blank=True)
     creator_type = models.CharField(max_length=20, choices=CREATOR_TYPES, default='OTHER')
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')

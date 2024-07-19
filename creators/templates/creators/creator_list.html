@@ -41,7 +41,7 @@
                                 <a href="{% url 'creator_aboutme' username=creator.user.username %}">
                                     <h5 class="card-title">{{ creator.user.username }}</h5>
                                 </a>
-                                <p class="card-text">{{ creator.about_me|truncatewords:20 }}</p>
+                                <p class="card-text">{{ creator.about_me|truncatewords:10 }}</p>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                                     <a href="{% url 'creator_aboutme' username=creator.user.username %}">
                                         <h5 class="card-title">{{ creator.user.username }}</h5>
                                     </a>
-                                    <p class="card-text">{{ creator.about_me|truncatewords:20 }}</p>
+                                    <p class="card-text">{{ creator.about_me|truncatewords:10 }}</p>
                                 </div>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                                     <h5 class="card-title">{{ creator.user.username }}</h5>
                                     <p class="card-text"><strong>Status:</strong> PENDING</p>
                                     <p class="card-text"><strong>Request Message:</strong></p>
-                                    <p class="card-text">{{ creator.about_me|truncatewords:30 }}</p>
+                                    <p class="card-text">{{ creator.about_me|truncatewords:10 }}</p>
                                     <form action="{% url 'approve_creator' username=creator.user.username %}" method="post" style="display: inline;">
                                         {% csrf_token %}
                                         <button type="submit" class="btn btn-success btn-sm">Approve</button>

@@ -49,7 +49,7 @@ class CreatorListView(ListView):
         
         if self.request.user.is_staff or self.request.user.is_superuser:
             context['pending_creators'] = Creator.objects.filter(
-                Q(status__iexact='PENDING') & ~Q(about_me='')
+                Q(status__iexact='PENDING') & Q(about_me='')
             )
         
         return context

@@ -48,8 +48,11 @@ class CreatorListView(ListView):
         context['creator_types'] = dict(Creator.CREATOR_TYPES)
         
         if self.request.user.is_staff or self.request.user.is_superuser:
-            context['pending_creators'] = Creator.objects.filter(status='PENDING').exclude(about_me='')
-        
+            #context['pending_creators'] = Creator.objects.filter(status='PENDING').exclude(about_me='')
+            print(f"User is staff or superuser: {self.request.user.username}")
+            pending_creators = Creator.objects.filter(status='PENDING').exclude(about_me='')
+            print(f"Number of pending creators: {pending_creators.count()}")
+            context['pending_creators'] = pending_creators
         return context
     
 #Request to become creator

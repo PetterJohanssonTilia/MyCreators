@@ -296,6 +296,7 @@ div.hidden,
     word-break: break-word;
     max-height: 133px;
     min-height: 133px;
+    margin: 20px;
 }
 
 .post-body img {

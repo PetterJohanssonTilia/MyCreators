@@ -49,10 +49,10 @@
             </div>
         </div>
         <div id="followed_creators" class="hidden creator-container">
-            <div class="row creators-row">
+            <div class="creators-row">
                 {% if followed_creators %}
                     {% for creator in followed_creators %}
-                        <div class="col-md-4 mb-4 creator-col">
+                        <div class="col mb-4 creator-col">
                             <div class="card creator-item" data-type="{{ creator.creator_type }}" style="width: 18rem;">
                                 <a href="{% url 'creator_aboutme' username=creator.user.username %}">
                                     {% if creator.avatar %}
@@ -79,10 +79,10 @@
         </div>
     {% if user.is_superuser or user.is_staff %}
         <div id="pending_creators" class="hidden creator-container">
-            <div class="row creators-row">
+            <div class="creators-row">
                 {% if pending_creators %}
                     {% for creator in pending_creators %}
-                        <div class="col-md-4 mb-4 creator-col">
+                        <div class="col mb-4 creator-col">
                             <div class="card  creator-item" style="width: 18rem;">
                                 <a href="{% url 'creator_aboutme' username=creator.user.username %}">
                                     {% if creator.avatar %}

@@ -20,7 +20,7 @@ import cloudinary.api
 import dj_database_url
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mycreators-16482e844e2d.herokuapp.com']

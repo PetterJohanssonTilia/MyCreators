@@ -10,7 +10,8 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 1.1rem !important;
     background-color: #f0f0f0;
     background-image: url("../images/background.jpg");
     background-size: cover;
@@ -79,13 +80,21 @@ a:active {
     font-weight: 400;
     font-style: normal;
     position: relative;
-    left: 20%;
-    margin: auto;
+    /*  left: 20%;*/
+    /*  margin: auto;*/
+    z-index: 1;
 }
 
 .jumbotron {
     background-image:
         linear-gradient(to top right, #8B5CF6, #EC4899);
+}
+
+
+#jumbotron-logo {
+    width: 70%;
+    max-width: 500px;
+    z-index: 0;
 }
 
 /* =============== Nav =============== */
@@ -129,7 +138,6 @@ a:active {
     position: absolute;
     width: 200px;
     height: 320px;
-    text-align: justify;
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
@@ -139,9 +147,25 @@ a:active {
     z-index: 2;
 }
 
+.item a h2 {
+    font-family: "Rubik Mono One", monospace;
+    color: #edebe6;
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+    font-weight: 200;
+    font-size: 1.5rem;
+    font-style: normal;
+    margin: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
 
 .item h1 {
-    font-size: 1vw;
+    font-size: 3vw;
     ;
 }
 
@@ -207,6 +231,24 @@ a:active {
     min-height: 133px;
 }
 
+.card-body a h5 {
+    font-family: "Rubik Mono One", monospace;
+    color: #edebe6;
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+    font-size: 1.5rem;
+    font-weight: 200;
+    font-style: normal;
+    margin: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+
+}
+
 /* Switch between Explore/Followed */
 
 
@@ -235,6 +277,26 @@ div.hidden,
 /* Click to Show  */
 .shown {
     display: block;
+}
+
+/* =============== Post content =============== */
+
+
+.post-body {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    max-height: 133px;
+    min-height: 133px;
+}
+
+.post-body img {
+    max-width: 100%;
+    max-height: 5vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
 }
 
 /* =============== Media Queries =============== */

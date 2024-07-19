@@ -135,6 +135,7 @@ a:active {
 }
 
 .item {
+    box-sizing: content-box !important;
     position: absolute;
     width: 200px;
     height: 320px;
@@ -229,6 +230,8 @@ a:active {
 .card-body {
     max-height: 133px;
     min-height: 133px;
+    box-sizing: content-box !important;
+
 }
 
 .card-body a h5 {

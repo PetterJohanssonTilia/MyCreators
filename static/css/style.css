@@ -219,6 +219,10 @@ a:active {
     justify-content: center;
 }
 
+.creator-item {
+    box-sizing: content-box;
+}
+
 .creator-item a img {
     min-height: 188px;
     max-height: 188px;

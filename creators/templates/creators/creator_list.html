@@ -94,7 +94,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ creator.user.username }}</h5>
                                     <p class="card-text"><strong>Status:</strong> PENDING</p>
-                                    <p class="card-text"><strong>Request Message:</strong></p>
+                                    <p class="card-text"><strong>Request Message:</strong>{{ creator.request_message }}</p>
                                     <p class="card-text">{{ creator.about_me|truncatewords:10 }}</p>
                                     <form action="{% url 'approve_creator' username=creator.user.username %}" method="post" style="display: inline;">
                                         {% csrf_token %}

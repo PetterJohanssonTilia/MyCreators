@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 /* =============== General styles =============== */
 html {
     height: 100%;
@@ -5,7 +12,12 @@ html {
 }
 
 body {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
@@ -22,10 +34,13 @@ body {
 }
 
 main {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 auto;
     flex: 1 0 auto;
 }
 
 footer {
+    -ms-flex-negative: 0;
     flex-shrink: 0;
 }
 
@@ -54,8 +69,15 @@ a:active {
 }
 
 .center-column {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     width: 70vw;
 }
@@ -87,6 +109,10 @@ a:active {
 
 .jumbotron {
     background-image:
+        -webkit-gradient(linear, left bottom, right top, from(#8B5CF6), to(#EC4899));
+    background-image:
+        -o-linear-gradient(bottom left, #8B5CF6, #EC4899);
+    background-image:
         linear-gradient(to top right, #8B5CF6, #EC4899);
 }
 
@@ -98,11 +124,9 @@ a:active {
 }
 
 /* =============== Nav =============== */
-.my-page-link {
-    align-self: right;
-}
 
 .navbarcontainer-fluid {
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
 
@@ -111,6 +135,7 @@ a:active {
 .avatar {
     width: 50px;
     height: 50px;
+    -o-object-fit: cover;
     object-fit: cover;
     border-radius: 50%;
 }
@@ -135,6 +160,7 @@ a:active {
 }
 
 .item {
+    -webkit-box-sizing: content-box !important;
     box-sizing: content-box !important;
     position: absolute;
     width: 200px;
@@ -142,6 +168,8 @@ a:active {
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
     transition: 0.5s;
     left: calc(50% - 110px);
     top: 15vh;
@@ -162,6 +190,8 @@ a:active {
     margin: 10px;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
     hyphens: auto;
 }
 
@@ -198,7 +228,10 @@ a:active {
 
 /* =============== creator_list / All creators =============== */
 .creators-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     width: 80%;
     margin: auto;
@@ -214,12 +247,17 @@ a:active {
 
 
 .creator-col {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     margin: auto;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
 }
 
 .creator-item {
+    -webkit-box-sizing: content-box;
     box-sizing: content-box;
 }
 
@@ -234,6 +272,7 @@ a:active {
 .card-body {
     max-height: 133px;
     min-height: 133px;
+    -webkit-box-sizing: content-box !important;
     box-sizing: content-box !important;
 
 }
@@ -252,6 +291,8 @@ a:active {
     margin: 10px;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
     hyphens: auto;
 
 }
@@ -304,6 +345,7 @@ div.hidden,
     max-height: 5vh;
     width: auto;
     height: auto;
+    -o-object-fit: contain;
     object-fit: contain;
 }
 
@@ -351,20 +393,5 @@ div.hidden,
 @media (min-width: 992px) {
     .jumbotron-text {
         font-size: 7rem;
-    }
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-    .jumbotron-text {
-        font-size: 8rem;
-    }
-
-    #next {
-        right: 15vw;
-    }
-
-    #prev {
-        left: 15vw;
     }
 }

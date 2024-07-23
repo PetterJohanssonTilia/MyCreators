@@ -135,6 +135,7 @@ a:active {
 }
 
 .item {
+    box-sizing: content-box !important;
     position: absolute;
     width: 200px;
     height: 320px;
@@ -218,6 +219,10 @@ a:active {
     justify-content: center;
 }
 
+.creator-item {
+    box-sizing: content-box;
+}
+
 .creator-item a img {
     min-height: 188px;
     max-height: 188px;
@@ -229,6 +234,8 @@ a:active {
 .card-body {
     max-height: 133px;
     min-height: 133px;
+    box-sizing: content-box !important;
+
 }
 
 .card-body a h5 {
@@ -289,6 +296,7 @@ div.hidden,
     word-break: break-word;
     max-height: 133px;
     min-height: 133px;
+    margin: 20px;
 }
 
 .post-body img {

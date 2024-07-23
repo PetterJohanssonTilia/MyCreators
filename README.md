@@ -314,8 +314,7 @@ All links and anchors are working.
 
 ### Manual Testing
 
-- Testing done through playing the game
-- Checked the links to Twitter and Facebook in the footer.
+- Testing done through going through the website both as a user, admin and no user
 
 ### Mobile Testing
 

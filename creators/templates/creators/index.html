@@ -2,17 +2,16 @@
 {% load static %}
 {% load cloudinary %}
 {% block title %}Creators You Follow{% endblock %}
-
 {% block content %}
 <div class="jumbotron">
   <p class="lead">A personalized creators platform</p>
   <div class="row d-flex flex-wrap">
     <div class="col-lg-6">
-      <h1 class="jumbotron-text">Find Creators.</h1></br>
+      <h1 class="jumbotron-text">Find Creators.</h1><br>
       <h1 class="jumbotron-text">Connect.</h1>
     </div> 
     <div class="mt-4 col-lg-6 d-flex justify-content-center">
-      <img class="img-fluid" id="jumbotron-logo" src="/static/images/mycreatorslogo.png">
+      <img class="img-fluid" id="jumbotron-logo" src="/static/images/mycreatorslogo.png" alt="jumbotron-picture">
     </div> 
   </div>
   <div class="slider">
@@ -20,9 +19,9 @@
       <div class="item">
         <a href="{% url 'creator_aboutme' username=creator.user.username %}">
           {% if creator.avatar %}
-            <img class="card-img-top" src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="avatar">
+            <img class="card-img-top" src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar">
           {% else %}
-              <img class="card-img-top" src="{% static 'images/placeholderavatar.png' %}" alt="{{ creator.user.username }}'s avatar" class="avatar">
+              <img class="card-img-top" src="{% static 'images/placeholderavatar.png' %}" alt="{{ creator.user.username }}'s avatar">
           {% endif %}
           <h2>{{ creator.user.username }}</h2>
         </a>

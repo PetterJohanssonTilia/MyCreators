@@ -13,7 +13,6 @@
             </div>
         </div>
     </div>
-
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="filter-buttons text-center">
@@ -32,9 +31,9 @@
                         <div class="card creator-item" data-type="{{ creator.creator_type }}" style="width: 18rem;">
                             <a href="{% url 'creator_aboutme' username=creator.user.username %}">
                                 {% if creator.avatar %}
-                                    <img class="card-img-top" src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar" class="avatar">
+                                    <img class="card-img-top" src="{{ creator.avatar.url }}" alt="{{ creator.user.username }}'s avatar">
                                 {% else %}
-                                    <img class="card-img-top" src="{% static 'images/placeholderavatar.png' %}" alt="{{ creator.user.username }}'s avatar" class="avatar">
+                                    <img class="card-img-top" src="{% static 'images/placeholderavatar.png' %}" alt="{{ creator.user.username }}'s avatar">
                                 {% endif %}
                             </a>
                             <div class="card-body">
@@ -116,8 +115,6 @@
             </div>
         </div>
     {% endif %}
-            </div>
-        </div>
     </div>
 </div>
 {% endblock %}

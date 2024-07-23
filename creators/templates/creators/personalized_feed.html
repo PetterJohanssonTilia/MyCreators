@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Feed{% endblock %}
-
 {% block content %}
   <div class="row">
     <div class="col-md-12 text-center">
@@ -33,10 +32,9 @@
             </div>
           </div>
           {% endfor %}
-        
       {% else %}
         <p>No posts in your feed. Try following some creators!</p>
       {% endif %}
     </div>
   </div>    
-    {% endblock %}
+{% endblock %}

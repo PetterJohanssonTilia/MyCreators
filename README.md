@@ -148,22 +148,22 @@ My goal was to create a minimalistic website with a vibrant look to it.
 
 Index</br>
 
-<img src="/readme/index.jpg" alt="Wireframes">
+<img src="assets/readme/index.jpg" alt="Wireframes">
 Creators</br>
 
-<img src="/readme/creators.jpg" alt="Wireframes">
+<img src="assets/readme/creators.jpg" alt="Wireframes">
 
 About me</br>
 
-<img src="/readme/aboutme.jpg" alt="Wireframes">
+<img src="assets/readme/aboutme.jpg" alt="Wireframes">
 
 Edit about me</br>
 
-<img src="/readme/editaboutme.jpg" alt="Wireframes">
+<img src="assets/readme/editaboutme.jpg" alt="Wireframes">
 
 Post/Comment</br>
 
-<img src="/readme/post.jpg" alt="Wireframes">
+<img src="assets/readme/post.jpg" alt="Wireframes">
 
 
 

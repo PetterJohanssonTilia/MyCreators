@@ -77,7 +77,7 @@
         items[active].style.opacity = 1;
 
         // Set the items after the active item
-        for (var i = active + 1; i < items.length; i++) {
+        for (let i = active + 1; i < items.length; i++) {
             stt++;
             items[i].style.transform = `translateX(${120 * stt}px) scale(${1 - 0.2 * stt}) perspective(16px) rotateY(-1deg)`;
             items[i].style.zIndex = -stt;
@@ -88,7 +88,7 @@
 
         // Reset stt for items before the active item
         stt = 0;
-        for (var i = active - 1; i >= 0; i--) {
+        for (let i = active - 1; i >= 0; i--) {
             stt++;
             items[i].style.transform = `translateX(${-120 * stt}px) scale(${1 - 0.2 * stt}) perspective(16px) rotateY(1deg)`;
             items[i].style.zIndex = -stt;
@@ -104,13 +104,13 @@
         active = active + 1 < items.length ? active + 1 : active;
         console.log("Next button clicked. New active item index:", active);
         loadShow();
-    }
+    };
 
     prev.onclick = function () {
         active = active - 1 >= 0 ? active - 1 : active;
         console.log("Previous button clicked. New active item index:", active);
         loadShow();
-    }
+    };
   });
 </script>
 {% endblock %}

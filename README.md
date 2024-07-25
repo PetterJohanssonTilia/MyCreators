@@ -119,7 +119,7 @@ User goals are:
 - Creators share interesting posts
 - The users and Creators interact through comments 
 
-What weighs more fills these needs by:
+My creators fills these needs by:
 
 - Having a clear and simple navigation bar
 - A simple Creators page which lets the user sort by different creators
@@ -258,44 +258,89 @@ HTML has been validated with [W3C HTML5 Validator](https://validator.w3.org/).
 
 <img src="assets/readme/validator/wc3validator1.png" alt="wc3 validator">
 
-|        |                                index.html                                 |                                                                game.html |
-| ------ | :-----------------------------------------------------------------------: | -----------------------------------------------------------------------: |
-|        | <img src="assets/readme/validator/html5index1.jpg" alt="html5 validator"> | <img src="assets/readme/validator/html5game1.jpg" alt="html5 validator"> |
-| Alerts |                              Trailing slash                               |                                                           Trailing slash |
+|        |index.html                                 |                                                           
+:-----------------------------------------------------------------------: | -----------------------------------------------------------------------: |
+|        | <img src="assets/readme/validator/indexhtml.jpg" alt="html5 validator"> |
+| Alerts |                              None                            |                                                           
+Errors | The < button is being seen as an error|
 
-"Trailing slash on void elements has no effect and interacts badly with unquoted attribute values." This is from the prettier extension to make the code more readable but it has no effect on the code
+The checker thinks it's an extra opening tag but it's being used as the content inside a button
+
+|        |creators.html                                 |                                                           
+:-----------------------------------------------------------------------: | -----------------------------------------------------------------------: |
+|        | <img src="assets/readme/validator/creatorshtml.jpg" alt="html5 validator"> |
+| Alerts |                              None                            |                                                           
+Errors | None|
+
+|        |feed.html                                 |                                                           
+:-----------------------------------------------------------------------: | -----------------------------------------------------------------------: |
+|        | <img src="assets/readme/validator/feedhtml.jpg" alt="html5 validator"> |
+| Warning |     Consider adding a lang attribute|                                                           
+Errors | None|
+
+The lang attribute is being added through base.html and on this specific page the checker couldn't find it
+
+|        |SpecificCreator.html                                 |                                                           
+:-----------------------------------------------------------------------: | -----------------------------------------------------------------------: |
+|        | <img src="assets/readme/validator/specificuserpagehtml.jpg" alt="html5 validator"> |
+| Warning |     None                               |                                                           
+Errors | Img element missing alt, Extra p end tags|
+
+The summernote addon is uploading pictures without ALT text and it's also adding an extra closing p tag inside the html
 
 HTML has been validated with [Wave.webaim HTML5 Validator](https://wave.webaim.org/).
 <img src="assets/readme/validator/wavevalidator1.png" alt="wave validator">
 
-|        |                                  index.html                                  |                                                                   game.html |
-| ------ | :--------------------------------------------------------------------------: | --------------------------------------------------------------------------: |
-|        | <img src="assets/readme/validator/webaimindex1.jpg" alt="webaim validation"> | <img src="assets/readme/validator/webaimgame1.jpg" alt="webaim validation"> |
-| Alerts |                                     None                                     |                                       A paragraph is used instead of header |
+|        |index.html                                 |                                                           
+:-----------------------------------------------------------------------: | -----------------------------------------------------------------------: |
+|        | <img src="assets/readme/validator/indexwebaim.jpg" alt="html5 validator"> |
+| Alerts |                              None                            |                                                           
+Errors |  Low contrast on background/text|
+
+The error is because both the background and text is white but I've added a black border around the text to make it more visable
+
+|        |creators.html                                 |                                                           
+:-----------------------------------------------------------------------: | -----------------------------------------------------------------------: |
+|        | <img src="assets/readme/validator/creatorswebaim.jpg" alt="html5 validator"> |
+| Alerts |            Redudant links                            |                                                           
+Errors |  Low contrast on background/text|
+
+The error is because both the background and text is white but I've added a black border around the text to make it more visable
+The redundant links is because the thinks all the specific user links go to the same page
+
 
 Website speed optimisation has been checked with [PageSpeed Insights](https://pagespeed.web.dev/).
 
 <img src="assets/readme/validator/pagespeedinsights1.png" alt="page speed insight">
 
-|                    |                                    index.html                                    |                                                                       game.html |
-| ------------------ | :------------------------------------------------------------------------------: | ------------------------------------------------------------------------------: |
-|                    | <img src="assets/readme/validator/pagespeedindex1.jpg" alt="page speed insight"> | <img src="assets/readme/validator/pagespeedgame1.jpg" alt="page speed insight"> |
-| Performance issues |                                       none                                       |                                                                            none |
+
+|        |index.html                                 |                                                           
+:-----------------------------------------------------------------------: | -----------------------------------------------------------------------: |
+|        | <img src="assets/readme/validator/pagespeedinsights2.jpg" alt="html5 validator"> |
+| Largest contenful paint |                              User avatars                            |                                                           
+
+The biggest slowdowns are the user avatars, they're not being compromised or using the most optimized formats      
 
 Javascript has been checked with [JShint](https://jshint.com/).
 
-<img src="assets/readme/validator/jshint1.jpg" alt="Jshint">
+<img src="assets/readme/validator/indexjava.jpg" alt="Jshint">
 
-|          |                        |     |
+|    Index      |                        |     |
 | -------- | :--------------------: | --: |
-| Warnings | Const and Let warnings |     |
+| Warnings | None |     |
 | Errors   |          None          |     |
 
-When using JSHint to check my JavaScript code, it doesn't recognize the const/let keywords, which is part of ES6 (ECMAScript 2015). This is because JSHint needs to be configured to understand ES6 syntax. Without this configuration, it may flag the use of const as an error, even though it's a valid feature in modern JavaScript.
+
+<img src="assets/readme/validator/creatorlistjava.jpg" alt="Jshint">
+
+|    Creator list     |                        |     |
+| -------- | :--------------------: | --: |
+| Warnings | None |     |
+| Errors   |          None          |     |
 
 CSS has been validated with [W3C CSS Validator](https://jigsaw.w3.org/css-validator/)
 <img src="assets/readme/validator/wc3cssvalidator1.png" alt="wc3 css validator">
-<img src="assets/readme/validator/cssvalidation1.jpg" alt="wc3 css validator results">
+<img src="assets/readme/validator/cssw3.jpg" alt="wc3 css validator results">
 Results are no errors found
 
 and auto-prefixed with [CSS Autoprefixer](https://autoprefixer.github.io/).
@@ -329,30 +374,54 @@ All links and anchors are working.
 - Internet Explorer was not tested and the site was not developed with it .in mind as support for the browser is gradually being dropped.
 
 ### Testing User Stories
+1. As a user I can create my own account
+2. As a user I can explore different creators so that I can find the ones that I like
+3. As a user I can view the creators pages so that I can learn more about them
+4. As a user I can follow creators so that I can curate my feed to only show the posts from the creators I'm following
+5. As a user I can view posts from the creators I'm following on my feed so that I can sort with what I want to see
+6. As a user I can comment on posts so that I can share my thoughts with other readers
+7. As a user I can become a creator so that I can start sharing my own posts
+8. As a site admin I can review, accept and decline users requests to become a creator so that I can decide which ones become creators
+9. As a creator I can make my own about me page so that users can learn more about me
+10. As a creator I can make my own posts so that users can read what's on my mind and what's happening with my creations
 
 |     |                                           User story                                            |                                                                                                              Answer to user story |
 | --- | :---------------------------------------------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------------------: |
-| 1   | "As a user interested in relaxing games I'd like to be able to play without feeling any stress" |                                The game features no attempts limit or time limit. This makes the game more suited for casual play |
-| 2   |                          "As a user I'd to see many different objects"                          | The game contains 4 categories and 5 objects in each category. Adding more objects to the game has been made easy by using arrays |
-| 3   |               "I'd Like to get a challenge and really test my guessing abilites"                |                 With the random multiplier being added to the lowest weight target it makes for a much more complex guessing game |
+| 1   | "As a user I can create my own account" | The user can click on the create account button and register, login and logout from their account|
+| 2   | "As a user I can explore different creators so that I can find the ones that I like" | TUsers can use the search bar to find specific creators or use tags to filter creators in the "Explore Creators" section |
+| 3   |  "As a user I can view the creators pages so that I can learn more about them" | The user can click on a creator to see their about me page with relevant information and their posts |
+| 4   | "As a user I can follow creators so that I can curate my feed to only show the posts from the creators I'm following"  | The user can follow/unfollow with the click of a button found on the users about me page |
+| 5   | "As a user I can view posts from the creators I'm following on my feed so that I can sort what I want to see" | The user can see posts from their followed creators on their "Feed" tab |
+| 6   | "As a user I can comment on posts so that I can share my thoughts with other readers" |The user can click on any specific post and leave a comment and choose to delete their comment |
+| 7   | "As a user I can become a creator so that I can start sharing my own posts"   |   The user can click the "become a creator" button and enter which type of creator along with why they should be allowed to become a creator |
+| 8   |" As a site admin I can review, accept and decline users requests to become a creator so that I can decide which ones become creators"  | The Staff can see users with a creator pending status and see what type of creator along with why they should become a creator information and click the accept or reject button |
+| 9   | "As a creator I can make my own about me page so that users can learn more about me" | The user can create about me information along with uploading their own avatar |
+| 10   |  "As a creator I can make my own posts so that users can read what's on my mind and what's happening with my creations
+"  | The user can write posts that also allows for uploading images, they can also decide to delete or edit their posts |
 
-## Bugs
+## Fixed Bugs
+
+Can all be found here : https://github.com/PetterJohanssonTilia/MyCreators/issues?q=is%3Aissue+is%3Aclosed
+
+- can't see pending creators on heroku but can see it in dev environment bug
+- Summernote creates html bug
+- creator cards gets squished when only a few are showing bug
+- users that doesn't click "become a creator" can't use the creators_list.html
+- can't press unfollow
+- user comments not displaying date
+- creators without the status of ACCEPTED shown in the creators list bug
+- pending creators not seen as admin
+- TypeError when pressing log out bug
+- Can't get {{ status }} in base.html bug
+- NoReverseMatch at /post/create/ bug
+- CKEDITOR returning htm Redirect for follow/unfollow "NoReverseMatch at /follow/1/" bugl instead of text when viewing the posts
+- Redirect for follow/unfollow "NoReverseMatch at /follow/1/"
+- about me in navbar page 404
+- Circular import bug
 
 ### Known Bugs
 
-- If you have guessed correctly 30 times in a row and all score-star spans are being showned displasyQuestion will not show a new question untill you've hiden more of the spans
-
-### Fixed Bugs
-
-- [negative-score-bug](https://github.com/PetterJohanssonTilia/project-2/issues/7)
-  When answering incorrect with an already negative score the game would not show a new question and display errors in console
-- [Readme](https://github.com/PetterJohanssonTilia/project-2/commit/53aaa8ea9d0471906e0294f3e4e879772752509c) Readme couldn't display images when they were named with uppercase .JPG and.PNG
-- [UnhideScorestar](https://github.com/PetterJohanssonTilia/project-2/issues/3)
-  Hiding/showing random spans instead of the already hidden/shown ones
-- [Evenlistener not working](https://github.com/PetterJohanssonTilia/project-2/issues/4) Couldn't add eventlistener dynamically so instead created a new class to listen to at the start of the game
-- [Multiplier Value](https://github.com/PetterJohanssonTilia/project-2/commit/85259db2acb84c6aca227400fb41c601f4dd4a47) not defined before being used
-
----
+- Pictures to big from user posts - If the user posts a big enough picture the edit/delete button on their posts gets pushed down and can't be clicked
 
 # Deployment
 

@@ -97,9 +97,6 @@ Future additions would be to implement a subscription service to financially sup
     </details>
 
 ---
-
-# UX
-
 ## Goals
 
 ### Visitor Goals
@@ -166,7 +163,6 @@ Post/Comment</br>
 <img src="assets/readme/post.jpg" alt="Wireframes">
 
 
-
 ### Fonts
 
 - The primary font, is sans-serif to keep it simple
@@ -192,33 +188,70 @@ Post/Comment</br>
 
 # Features
 
+### Models
+<img src="assets/readme/model/creatormodel.jpg" alt="Creatormodel">
+<img src="assets/readme/model/postmodel.jpg" alt="Postmodel">
+
 ## Page Elements
 
-### Header
+### Navbar
 
-<img src="./assets/readme/header1.jpg" alt="header">
+<img src="assets/readme/feature/navbar.jpg" alt="navbar">
 
-At the top of all pages to display the name of the game.
+The Navbar is collapsible and responsive. Here a non user will only find "Creators" and "Register" buttons
 
-### Guess-boxes
+A signed in user will find "Creators", "Feed" and a "Become a creator" buttons
 
+A creator will find "Creators","Feed" and have their own "My page" dropdown menu which allows them to edit their about me information and create new Posts
 
-#### Footer
+### Footer
+<img src="assets/readme/feature/footer.jpg" alt="footer">
+The footer only contains copyright information
 
-<img src="./assets/readme/footer1.jpg" alt="Footer">
+### Hero Image
+<img src="assets/readme/feature/heroimage.jpg" alt="heroimage">
 
-- Located at the bottom of every page
-- Displays the author of the project
-- Changing shape for larger or smaller devices.
+The hero image has a call to action text, a logo and creator-cards the user can click through, to quickly see if the users on the site interest them
 
----
+### Explore Creators
+
+<img src="assets/readme/feature/creators.jpg" alt="creators">
+
+This page allows the user to find new creators, see their followed creators and filter them by class.
+
+The site staff has access to the "pending creators" tab which allows them to see all users that want to become a creator and accept/reject their request
+
+### Feed
+<img src="assets/readme/feature/feed.jpg" alt="feed">
+
+The Feed displays the users followed creators and the posts they've made
+
+### Creators page
+<img src="assets/readme/feature/creatorpage.jpg" alt="creatorpage">
+
+When a user clicks on a specific creator, they will see that creators page. It displays their About-Me information, their avatar and their posts.
+
+A user can Follow/Unfollow a creator through this page
+
+#### My-Page
+
+<img src="assets/readme/feature/mypage1.jpg" alt="mypage">
+
+If a user becomes a creator they'll get access to their own page
+
+Here they can:
+1. Upload their own avatar-picture
+2. Edit their own About Me information
+3. Create new posts
+4. Edit and delete their old posts
+5. Delete their account
+
 
 # Feature-Ideas
 
-### Player feedback
+1. Creating a comment model. Instead of saving comment information inside a JSON it'd be better to create a unique comment model for easier use and easier readabilty from the /admin page
 
-The Idea of the attempts-box, score-box and the bubbles in the background is to give the
-player feedback when playing. When you guess a bubble either appears or dissapears, the attempts-box changes its score and the score-box is animated to bounce and change color to grab the users attention and indicate a right or wrong guess.
+2. Adding a payment system - To engage the users/creators a donation/subscription system should be added in the future
 
 # Technologies Used
 
@@ -232,6 +265,7 @@ player feedback when playing. When you guess a bubble either appears or dissapea
   - Interactivity
 - [Python]
   - Back-end
+
 ## Libraries
 
 - [Google Fonts](https://fonts.google.com)
@@ -244,7 +278,12 @@ player feedback when playing. When you guess a bubble either appears or dissapea
 - [Gitpod](https://gitpod.io/)
   - IDE for project development.
 
-## Other Tools
+## Databases
+
+- SQLite 
+  - Used in the development environment
+- PostgresSQL
+  - Used in Heroku 
 
 ---
 
@@ -319,7 +358,7 @@ Website speed optimisation has been checked with [PageSpeed Insights](https://pa
 |        | <img src="assets/readme/validator/pagespeedinsights2.jpg" alt="html5 validator"> |
 | Largest contenful paint |                              User avatars                            |                                                           
 
-The biggest slowdowns are the user avatars, they're not being compromised or using the most optimized formats      
+The biggest slowdowns are the user avatars, they're not being compressed or using the most optimized formats      
 
 Javascript has been checked with [JShint](https://jshint.com/).
 
@@ -425,45 +464,179 @@ Can all be found here : https://github.com/PetterJohanssonTilia/MyCreators/issue
 
 # Deployment
 
-## Local Deployment
+### Heroku Deployment
+This project uses Heroku, a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
 
-### Local Preparation
+Deployment steps are as follows, after account setup:
 
-**Requirements:**
--A webbrowser of your choice, Chrome being recommended
+Select New in the top-right corner of your Heroku Dashboard, and select Create new app from the dropdown menu.
+Your app name must be unique, and then choose a region closest to you (EU or USA), and finally, select Create App.
+From the new app Settings, click Reveal Config Vars, and set your environment variables.
 
-### Local Instructions
+| Key  |Value|                                                           
+:------: | -------: |
+| DATABASE_URL |   user's own value   |
+| IP |   0.0.0.0  |   
+| Database_name |  user's own value   |   
+| Database_URI |   user's own value   |   
+| PORT | 5000   |   
+| SECRET_KEY |  user's own value   |      
 
-1. Download a copy of the project repository [here](https://github.com/PetterJohanssonTilia/Project-2/archive/refs/heads/main.zip) and extract the zip file
-2. Open the index.html file in your browser, This file can be dragged and droped into your browser to open it.
-3. Enjoy the site!
+Heroku needs two additional files in order to deploy properly.
 
-## Github Deployment
+requirements.txt
+Procfile
+You can install this project's requirements (where applicable) using:
 
-### Github Preparation
+```pip3 install -r requirements.txt```
+If you have your own packages that have been installed, then the requirements file needs updated using:
 
-- It is possible to copy or clone the repository to directly for deployment,
-  **Requirements:**
-- A free GitHub account.
-- A free EmailJS account.
+```pip3 freeze --local > requirements.txt```
+The Procfile can be created with the following command:
 
-### Github Instructions
+```echo web: python app.py > Procfile```
+replace app.py with the name of your primary Flask app name; the one at the root-level
+For Heroku deployment, follow these steps to connect your own GitHub repository to the newly created app:
 
-1. Log in to your GitHub account.
-   navigate to [https://github.com/PetterJohanssonTilia/Project-1-](https://github.com/PetterJohanssonTilia/Project-1-).
-1. You can set up your own repository and copy or clone it, or you fork the repository.
-1. `git add`, `git commit` and `git push` to a GitHub repository, if necessary.
-1. GitHub pages will update from the Main branch by default.
-1. Go to the **Settings** page of the repository.
-1. Scroll down to the **Github Pages** section.
-1. Select the Main Branch as the source and **Confirm** the selection.
-1. Wait a minute or two and it should be live for viewing.
+Either:
+
+Select Automatic Deployment from the Heroku app.
+
+Or:
+
+In the Terminal/CLI, connect to Heroku using this command: ```heroku login -i```
+Set the remote for Heroku: ```heroku git:remote -a app_name``` (replace app_name with your app name)
+After performing the standard Git add, commit, and push to GitHub, you can now type:
+```git push heroku main```
+The project should now be connected and deployed to Heroku!
+
+### Local Deployment
+This project can be cloned or forked in order to make a local copy on your own system.
+
+For either method, you will need to install any applicable packages found within the requirements.txt file.
+
+```pip3 install -r requirements.txt.```
+If you are using SQLAlchemy for your project, you need to create a local PostgreSQL database. In this example, the example database name is db-name.
+
+
+```workspace (branch) $ set_pg
+workspace (branch) $ psql
+
+... connection to postgres ...
+
+postgres=# CREATE DATABASE db-name;
+CREATE DATABASE
+postgres=# \c db-name;
+You are now connected to database "db-name" as user "foobar".
+db-name=# \q
+```
+Once that database is created, you must migrate the database changes from your models.py file. This example uses app-name for the name of the primary Flask application.
+
+``` workspace (branch) $ python3
+
+... connection to Python CLI ...
+
+>>> from app-name import db
+>>> db.create_all()
+>>> exit()
+To confirm that the database table(s) have been created, you can use the following:
+
+workspace (branch) $ psql -d db-name
+
+... connection to postgres ...
+
+postgres=# \dt
+
+	List of relations
+Schema | Name | Type | Owner
+-------+------+------+--------
+public | blah1 | table | foobar
+public | blah2 | table | foobar
+public | blah3 | table | foobar
+
+db-name=# \q
+```
+
+You will need to create a new file called env.py at the root-level, and include the same environment variables listed above from the Heroku deployment steps, plus a few extras.
+
+Sample env.py file:
+
+``` import os
+
+os.environ.setdefault("IP", "0.0.0.0")
+os.environ.setdefault("MONGO_DBNAME", "user's own value")
+os.environ.setdefault("MONGO_URI", "user's own value")
+os.environ.setdefault("PORT", "5000")
+os.environ.setdefault("SECRET_KEY", "user's own value")
+
+# local environment only (do not include these in production/deployment!)
+os.environ.setdefault("DB_URL", "user's own value")
+os.environ.setdefault("DEBUG", "True")
+os.environ.setdefault("DEVELOPMENT", "True")
+```
+If using Flask-Migrate, make sure to include the following steps as well.
+
+``` pip3 install Flask-Migrate```
+Import the newly installed package on your main __init__.py file:
+  * from flask_migrate import Migrate
+
+Define Migrate in the same file after app and db are defined:
+  * migrate = Migrate(app, db)
+
+Initiate the migration changes in the terminal:
+
+``` workspace (branch) $ flask db init
+
+	... generating migrations ...
+
+workspace (branch) $ set_pg
+workspace (branch) $ flask db migrate -m "Add a commit message for this migration"
+
+	... migrating changes ...
+
+workspace (branch) $ flask db upgrade
+
+	... updating database ...
+```
+
+### Cloning
+You can clone the repository by following these steps:
+
+1. Go to the GitHub repository
+2. Locate the Code button above the list of files and click it
+3. Select if you prefer to clone using HTTPS, SSH, or GitHub CLI and click the copy button to copy the URL to your clipboard
+4. Open Git shell or Terminal
+5. Change the current working directory to the one where you want the cloned directory
+6. In your IDE Terminal, type the following command to clone my repository:
+git clone https://github.com/rhysbobbett/gardenmaintenance.git
+7. Press Enter to create your local clone.
+
+Alternatively, if using Gitpod, you can click below to create your own workspace using this repository.
+
+Open in Gitpod
+
+Please note that in order to directly open the project in Gitpod, you need to have the browser extension installed. A tutorial on how to do that can be found here.
+
+### Forking
+
+By forking the GitHub Repository, we make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original owner's repository. You can fork this repository by using the following steps:
+
+Log in to GitHub and locate the GitHub Repository
+At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
+Once clicked, you should now have a copy of the original repository in your own GitHub account!
+
 
 ## Credits and Contact
+ The code for the item-cards on the front page was made by Lun Dev
+ - https://www.lundevweb.com/2023/02/animation-card-slider-in-html-css.html
 
 ### Content
 
-All the image content was from pixabay.com and all the objects and their weights was generated by chatgpt
+All the image content was from pixabay.com and all the users information was created with chatGPT
+
+The main background was taken from google:
+
+https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F007%2F188%2F453%2Foriginal%2Fabstract-blur-background-with-pastel-color-free-vector.jpg&f=1&nofb=1&ipt=618c7fb3d99f2e37abc52c4c583f2af2be26e9a579c44f224219700d4e1b38c5&ipo=images
 
 ### Contact
 

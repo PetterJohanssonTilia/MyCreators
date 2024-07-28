@@ -128,6 +128,7 @@
             const followed_creators = document.getElementById('followed_creators');
             const pending_creators = document.getElementById('pending_creators');
             const filterButtons = document.querySelectorAll('.filter-btn');
+            const filterButtonsContainer = document.querySelector('.filter-buttons');
 
             function applyFilter(activeSection) {
                 const activeFilter = document.querySelector('.filter-btn.active');
@@ -169,7 +170,13 @@
                 activeButton.classList.remove('unactive');
                 activeSection.classList.add('shown');
                 activeSection.classList.remove('hidden');
-                applyFilter(activeSection);
+                        
+                if (activeButton === pending_button) {
+                    filterButtonsContainer.style.display = 'none';
+                } else {
+                    filterButtonsContainer.style.display = 'block';
+                    applyFilter(activeSection);
+                }
             }
 
             explore_button.addEventListener('click', () => switchTab(explore_button, explore_creators));

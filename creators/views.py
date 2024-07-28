@@ -9,8 +9,7 @@ from django.db.models import Q
 from .forms import UserRegisterForm, CreatorRequestForm, CreatorProfileForm, PostForm
 from .models import Creator, Post
 
-
-# Create your views here.
+#================= Index =================
 
 #Index
 class IndexView(TemplateView):

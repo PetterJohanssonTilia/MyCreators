@@ -1,3 +1,4 @@
+<img src="assets/readme/feature/pages.jpg">
 <h1>My Creators</h1>
 This is a Django portfolio-project. <br>
 The website is designed to be a place for creators to share posts with their audience. a place for regular users to be able to follow creators they like, get a personalized feed and be able to comment on their posts<br><br>
@@ -31,6 +32,11 @@ Future additions would be to implement a subscription service to financially sup
 2.  <details open>
       <summary><a href="#features">Features</a></summary>
       
+      <details>
+      <summary><a href="#features">Models</a></summary>
+      - [Models](#models)
+      </details>
+
       <details>
       <summary><a href="#page-elements">Page Elements</a></summary>
 
@@ -90,13 +96,15 @@ Future additions would be to implement a subscription service to financially sup
     </details>
 
 6.  <details open>
-      <summary><a href="#credit-and-contact">Credit and Contact</a></summary>
-      
+      <summary><a href="#credits-and-contact">Credit and Contact</a></summary>
+
       - [Content](#content)
       - [Contact](#contact)
     </details>
 
 ---
+# UX
+
 ## Goals
 
 ### Visitor Goals

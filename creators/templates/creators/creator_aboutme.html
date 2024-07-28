@@ -20,6 +20,7 @@
 
             {% if user == creator.user %}
             <a href="{% url 'edit_creator_aboutme' %}" class="btn pink">Edit About Me</a>
+            <a href="{% url 'delete_creator_account' %}" class="btn btn-danger">Delete Account</a>
             {% endif %}
 
             {% if user.is_authenticated %}

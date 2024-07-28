@@ -226,6 +226,12 @@ The site staff has access to the "pending creators" tab which allows them to see
 
 The Feed displays the users followed creators and the posts they've made
 
+### Comments
+<img src="assets/readme/feature/usercomments.jpg" alt="comments">
+
+The user can create their own comments on any post and also delete it
+
+
 ### Creators page
 <img src="assets/readme/feature/creatorpage.jpg" alt="creatorpage">
 
